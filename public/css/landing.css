@@ -1,7 +1,7 @@
 #header-svg {
     position: absolute;
-    top: 0;
     left: 0;
+    bottom: 0;
     width: 100%;
     height: 720px;
 }
@@ -11,9 +11,164 @@ header {
 }
 
 .invert-section {
-    background: linear-gradient(0deg,#ff6a00 0,#ee0979 100%);
+    background: linear-gradient(0deg,#2196F3 0,#01579B 100%);
+    color: white;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.invert-section-dark {
+    background: linear-gradient(0deg, #104874 0, #002c50 100%);
     background-attachment: fixed;
     color: white;
+}
+
+header.masthead .bg-circle {
+    background: linear-gradient(0deg,#01579B 0,#2196F3 100%);
+}
+
+header.masthead {
+    position: relative;
+    background: linear-gradient(0deg,#2196F3 0,#01579B 100%);
+}
+
+.btn-primary {
+    background-color: white;
+    color: #01579B;
+    box-shadow: rgba(0,0,0,0.1) 10px 10px 20px;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: white !important;
+    color: #01579B;
+    box-shadow: rgba(0,0,0,0.3) 10px 10px 20px;
+}
+
+.pill-header {
+    text-align: center;
+    padding-bottom: 60px;
+}
+
+.pill-header .pill-header-inner {
+    display: inline-block;
+    border-radius: 50px;
+    box-shadow: rgba(0,0,0,0.1) 10px 10px 20px;
+}
+
+.pill-header .pill-header-inner button {
+    background-color: transparent;
+    border: white 2px solid;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+.pill-header .pill-header-inner button.active {
+    background-color: white;
+    color: #01579B;
+}
+
+.pill-header .pill-header-inner button.left {
+    border-right: none;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.pill-header .pill-header-inner button.right {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.footer-logo {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.footer-logo:hover {
+    opacity: 1;
+}
+
+.navbar-custom {
+    background-color: transparent;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    padding-right: 20px;
+}
+
+.navbar-custom.filled {
+    background-color: white;
+    box-shadow: rgba(0,0,0,0.25) 0 0 20px;
+    transition: all ease 0.5s;
+}
+
+section {
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.navbar-custom.filled .navbar-nav .nav-link {
+    color: #01365f;
+    transition: all ease 0.5s;
+}
+
+.navbar-custom.filled .navbar-toggler .navbar-toggler-icon {
+    color: #01579B;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#01579B' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+
+
+.navbar-custom.filled .navbar-toggler {
+    border-color: #01579B;
+}
+
+.navbar-custom {
+    transition: all ease 0.5s;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-control {
+    background-color: transparent;
+    border: none;
+    border-bottom: #01579B 2px solid;
+    border-radius: 0;
+    padding-left: 0;
+    box-shadow: rgba(0,0,0,0.05) 0 10px 10px -5px;
+}
+
+.form-control:focus {
+    background-color: transparent;
+    box-shadow: rgba(0,0,0,0.1) 0 10px 10px -5px;
+}
+
+.form-control.inverted {
+    color: white;
+    border-bottom: rgba(255,255,255,0.7) 2px solid;
+}
+
+.form-control.inverted:focus {
+    border-bottom: rgba(255,255,255,1) 2px solid;
+}
+
+form label {
+    opacity: 0.7;
+}
+
+.pad-top {
+    padding-top: 20px;
+}
+
+/*form-control inverted*/
+
+h2 {
+    font-size: 60px !important;
 }
 
 @media (max-width: 700px){

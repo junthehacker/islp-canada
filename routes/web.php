@@ -24,5 +24,8 @@ Route::get('/portal/users', 'PortalController@usersPage')->name('users');
 Route::get('/portal/submissions', 'PortalController@submissionsPage')->name('submissions');
 Route::post('/portal/logout', 'PortalController@logout')->name('logout');
 Route::post('/portal/users/create', 'PortalController@createUser')->name('createUser');
+Route::post('/portal/posters/create', 'PosterController@create')->name('createPoster');
+
 
 Route::post('/portal/login', 'UserController@authenticate');
+Route::post('/portal/signup/teacher', 'UserController@createTeacherAccount');

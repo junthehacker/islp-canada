@@ -10,16 +10,26 @@
         <svg id="header-svg"></svg>
         <div class="masthead-content">
             <div class="container">
+                @if (session('teacher_signup_error'))
+                    <div class="alert alert-danger">
+                        {{ session('teacher_signup_error') }}
+                    </div>
+                @endif
+                @if (session('teacher_signup_success'))
+                    <div class="alert alert-primary">
+                        {{ session('teacher_signup_success') }}
+                    </div>
+                @endif
                 <h1 class="masthead-heading mb-0">ISLP</h1>
-                <h2 class="masthead-subheading mb-0">National Statistics Poster Competiton</h2>
-                <h3>January 3rd, 2019</h3>
+                <h2 class="masthead-subheading mb-0">Canadian National Statistics Poster Competiton</h2>
+                <h3>Create, Share, Compete</h3>
                 <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">How to Participate</a>
             </div>
         </div>
     </header>
 
 
-    <section>
+    <section class="reveal">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 order-lg-2">
@@ -29,15 +39,18 @@
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4"><i class="fa fa-question" aria-hidden="true"></i> What is ISLP Poster Competition</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4"><i class="fa fa-question" aria-hidden="true"></i> What is ISLP Poster
+                            Competition</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
+                            sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
+                            voluptatum molestiae adipisci, beatae obcaecati.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section>
+    <section class="reveal">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -47,8 +60,11 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">
-                        <h2 class="display-4"><i class="fa fa-pencil" aria-hidden="true"></i> Create, Share, Compete</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4"><i class="fa fa-pencil" aria-hidden="true"></i> Create, Share, Compete
+                        </h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
+                            sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
+                            voluptatum molestiae adipisci, beatae obcaecati.</p>
                     </div>
                 </div>
             </div>
@@ -56,48 +72,118 @@
     </section>
 
     <section class="invert-section">
-        <div class="container">
+        <div class="container reveal">
             <div class="row align-items-center">
                 <div class="col-lg-12 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Student? Participate Today!</h2>
-                        <p>Ask your teacher about ISLP national poster competition and participate today! There are many prizes to be won.</p>
-                        <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Sample Posters</a>
+                        <div class="pill-header">
+                            <div class="pill-header-inner">
+                                <button class="left active" id="student-button" onClick="switchToStudent();">Student</button><button class="right" id="teacher-button" onClick="switchToTeacher();">Teacher</button>
+                            </div>
+                        </div>
+                        <div id="student-section">
+                            <h2 class="display-4"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Student?
+                                Participate Today!</h2>
+                            <p>Ask your teacher about ISLP national poster competition and participate today! There are
+                                many prizes to be won.</p>
+                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Sample Posters</a>
+                        </div>
+                        <div class="hidden" id="teacher-section">
+                            <h2 class="display-4"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Register Your Class</h2>
+                            <p>
+                                Register your class today for ISLP national statistics competition! An account allows
+                                you to submit posters, manage submissions, and ask questions on the forum.<br>
+                                All information collected is for the competition only, we never share your information
+                                with anyone else.
+                            </p>
+                            <form action="{{ url('/portal/signup/teacher') }}" method="post">
+                                {{ csrf_field() }}
+                                <div class="row">
+                                    <div class="col-md-6 pad-top">
+                                        <label for="teacher-fullname">Full Name *</label>
+                                        <input type="text" name="name" class="form-control inverted" id="teacher-fullname"/>
+                                    </div>
+                                    <div class="col-md-6 pad-top">
+                                        <label for="teacher-email">Email Address (Work) *</label>
+                                        <input type="email" name="email" class="form-control inverted" id="teacher-email"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 pad-top">
+                                        <label for="teacher-subject">Teaching Subject *</label>
+                                        <input type="text" name="teaching_subject" class="form-control inverted" id="teacher-subject"/>
+                                    </div>
+                                    <div class="col-md-6 pad-top">
+                                        <label for="teacher-hear">How did you hear about ISLP? *</label>
+                                        <input type="text" name="heard_from" class="form-control inverted" id="teacher-hear"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 pad-top">
+                                        <label for="teacher-school">School Name *</label>
+                                        <input type="text" name="school" class="form-control inverted" id="teacher-school"/>
+                                    </div>
+                                    <div class="col-md-6 pad-top">
+                                        <label for="teacher-password">Choose a password for your account *</label>
+                                        <input type="password" name="password" class="form-control inverted" id="teacher-password"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 pad-top">
+                                        <label for="teacher-resources">Any additional resources required?</label>
+                                        <input type="text" name="additional_resources" class="form-control inverted" id="teacher-resources"/>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Register</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section>
+    <section class="reveal">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 order-lg-1">
                     <div class="p-5">
                         <h2 class="display-4"><i class="fa fa-list-ol" aria-hidden="true"></i> Rules</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
+                            sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
+                            voluptatum molestiae adipisci, beatae obcaecati.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section>
+    <section class="reveal">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 order-lg-1">
                     <div class="p-5">
                         <h2 class="display-4"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule</h2>
-                        <div id="example5.2" style="height: 250px; overflow-x: scroll; overflow-y: hidden"></div>
+                        <p>
+                            Deadline to submit posters - February 29th, 2019<br>
+                            National winners announced - March 29th, 2019
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-5 bg-black">
+    <footer class="py-5 bg-black invert-section-dark">
         <div class="container">
-            <p class="m-0 text-center text-white small">Copyright &copy; ISLP 2018 All Rights Reserved</p>
+            <p class="m-0 text-center text-white small">
+                Copyright &copy; ISLP 2018 All Rights Reserved<br>
+            </p>
+            <hr>
+            <p class="m-0 text-center text-white small footer-logo">
+                Production of this website is funded by<br><br>
+                <img src="{{ asset('images/scc.png') }}" width="200"/>
+            </p>
         </div>
         <!-- /.container -->
     </footer>
@@ -106,15 +192,15 @@
         var s = Snap("#header-svg");
         // Lets create big circle in the middle:
         var rects = [];
-        for(let i = 0; i < 50; i++){
+        for (let i = 0; i < 50; i++) {
             let height = Math.floor((Math.random() * 300) + 100);
             let rect = s.rect(55 * i, 0, 50, 0, 5, 5);
             rect.attr({
-                fill: '#B71C1C',
+                fill: '#0D47A1',
                 opacity: Math.random()
             });
 
-            setTimeout(function(){
+            setTimeout(function () {
                 Snap.animate(0, height, function (val) {
                     rect.attr({
                         height: val,
@@ -125,42 +211,34 @@
 
             rects.push(rect)
         }
+
+        $(function () {
+            $(document).scroll(function () {
+                if ($(this).scrollTop() > 200) {
+                    $("#primary-nav").addClass("filled");
+                } else {
+                    $("#primary-nav").removeClass("filled");
+                }
+            })
+        });
+
+        function switchToStudent(){
+            $("#student-button").addClass("active");
+            $("#teacher-button").removeClass("active");
+            $("#student-section").removeClass("hidden");
+            $("#teacher-section").addClass("hidden");
+        }
+
+        function switchToTeacher(){
+            $("#teacher-button").addClass("active");
+            $("#student-button").removeClass("active");
+            $("#teacher-section").removeClass("hidden");
+            $("#student-section").addClass("hidden");
+        }
     </script>
 
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <script type="text/javascript">
-        google.charts.load("current", {packages:["timeline"]});
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-
-            var container = document.getElementById('example5.2');
-            var chart = new google.visualization.Timeline(container);
-            var dataTable = new google.visualization.DataTable();
-
-            dataTable.addColumn({ type: 'string', id: 'Room' });
-            dataTable.addColumn({ type: 'string', id: 'Name' });
-            dataTable.addColumn({ type: 'date', id: 'Start' });
-            dataTable.addColumn({ type: 'date', id: 'End' });
-            dataTable.addRows([
-                [ 'Magnolia Room',  'CSS Fundamentals',    new Date(0,0,0,12,0,0),  new Date(0,0,0,14,0,0) ],
-                [ 'Magnolia Room',  'Intro JavaScript',    new Date(0,0,0,14,30,0), new Date(0,0,0,16,0,0) ],
-                [ 'Magnolia Room',  'Advanced JavaScript', new Date(0,0,0,16,30,0), new Date(0,0,0,19,0,0) ],
-                [ 'Gladiolus Room', 'Intermediate Perl',   new Date(0,0,0,12,30,0), new Date(0,0,0,14,0,0) ],
-                [ 'Gladiolus Room', 'Advanced Perl',       new Date(0,0,0,14,30,0), new Date(0,0,0,16,0,0) ],
-                [ 'Gladiolus Room', 'Applied Perl',        new Date(0,0,0,16,30,0), new Date(0,0,0,18,0,0) ],
-                [ 'Petunia Room',   'Google Charts',       new Date(0,0,0,12,30,0), new Date(0,0,0,14,0,0) ],
-                [ 'Petunia Room',   'Closure',             new Date(0,0,0,14,30,0), new Date(0,0,0,16,0,0) ],
-                [ 'Petunia Room',   'App Engine',          new Date(0,0,0,16,30,0), new Date(0,0,0,18,30,0) ]]);
-
-            var options = {
-                timeline: { singleColor: '#8d8' },
-            };
-
-            chart.draw(dataTable, options);
-        }
-    </script>
 
 
     <script>
@@ -195,7 +273,7 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero:true
+                            beginAtZero: true
                         }
                     }]
                 }
@@ -207,29 +285,29 @@
         new Chart(document.getElementById("line-chart"), {
             type: 'line',
             data: {
-                labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+                labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
                 datasets: [{
-                    data: [86,114,106,106,107,111,133,221,783,2478],
+                    data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
                     label: "Africa",
                     borderColor: "#3e95cd",
                     fill: false
                 }, {
-                    data: [282,350,411,502,635,809,947,1402,3700,5267],
+                    data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
                     label: "Asia",
                     borderColor: "#8e5ea2",
                     fill: false
                 }, {
-                    data: [168,170,178,190,203,276,408,547,675,734],
+                    data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
                     label: "Europe",
                     borderColor: "#3cba9f",
                     fill: false
                 }, {
-                    data: [40,20,10,16,24,38,74,167,508,784],
+                    data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
                     label: "Latin America",
                     borderColor: "#e8c3b9",
                     fill: false
                 }, {
-                    data: [6,3,2,2,7,26,82,172,312,433],
+                    data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
                     label: "North America",
                     borderColor: "#c45850",
                     fill: false
@@ -247,9 +325,6 @@
 
     <script>
         window.sr = ScrollReveal();
-        sr.reveal('h1');
-        sr.reveal('h2');
-        sr.reveal('h3');
-        sr.reveal('p');
+        sr.reveal('.reveal');
     </script>
 @endsection

@@ -26,12 +26,6 @@ $roleNames = [
                     </div>
                 @endif
                 <h1>Users</h1>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
-                    <i class="fa fa-plus"
-                       aria-hidden="true"></i>
-                    Create New User
-                </button>
-                <hr>
                 <table class="table table-striped">
                     <thead>
                     <tr>

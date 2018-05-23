@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Poster;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,12 @@ class PortalController extends Controller
 {
     public function dashboardPage(Request $request){
         if($request->user){
+            if($request->user->role === 0){
+                return view('portal/dashboard', [
+                    'users' => User::all(),
+                    'posters' => Poster::all()
+                ]);
+            }
             return view('portal/dashboard');
         } else {
             return redirect('/portal/login');
@@ -27,6 +34,9 @@ class PortalController extends Controller
 
     public function submissionsPage(Request $request){
         if($request->user){
+            if($request->user->role === 0){
+                return view('portal/submissions', ['posters' => Poster::all()]);
+            }
             return view('portal/submissions');
         } else {
             return redirect('/portal/login');
