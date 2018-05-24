@@ -85,8 +85,12 @@
                             <h2 class="display-4"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Student?
                                 Participate Today!</h2>
                             <p>Ask your teacher about ISLP national poster competition and participate today! There are
-                                many prizes to be won.</p>
+                                many prizes to be won. The competition is completely free, and you will have a chance to enter ISLP international poster competition!</p>
                             <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Sample Posters</a>
+                            <br><br><br><br>
+                            <h3>Undergraduate? Interested in becoming a mentor?</h3>
+                            <p>Apply to become a volunteering mentor for ISLP today! Strengthen your statistical skills, and have fun!</p>
+                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Mentor Application</a>
                         </div>
                         <div class="hidden" id="teacher-section">
                             <h2 class="display-4"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Register Your Class</h2>
@@ -149,9 +153,58 @@
                 <div class="col-lg-12 order-lg-1">
                     <div class="p-5">
                         <h2 class="display-4"><i class="fa fa-list-ol" aria-hidden="true"></i> Rules</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
-                            sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                            voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>Who can take part?</h3>
+                                <ul>
+                                    <li>Teams of 2−5 students <b>(we do not allow posters made by only one student)</b></li>
+                                    <li>Three divisions:</li>
+                                    <ul>
+                                        <li>Students born in 2002 and younger (lower secondary or upper comprehensive school)</li>
+                                        <li>Students born in 1999 and younger (upper secondary school)</li>
+                                        <li>Undergraduate students in university/college (Bachelor’s degree students or equivalent, no age limit)</li>
+                                    </ul>
+                                </ul>
+                                <h3>How can I participate?</h3>
+                                <ul>
+                                    <li>Posters must be submitted by teachers <i data-toggle="tooltip" class="fa fa-question-circle-o tooltip-question" data-placement="top" title="Are you a teacher? Register your class above by selecting [Teacher]"></i> to country coordinators for entry in National Competition</li>
+                                    <li>Teachers can submit posters using <a href="{{url('portal/login')}}">Canadian ISLP Poster Competition Portal</a>.</li>
+                                </ul>
+                                <h3>How much does it cost?</h3>
+                                <ul>
+                                    <li>It is completely FREE!</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h3>Poster content</h3>
+                                <ul>
+                                    <li>There is <b>no particular theme or topic required</b> for a poster to be eligible. However, posters should
+                                        reflect or illustrate usage, analysis, interpretation and communication of statistics or statistical
+                                        information and findings.</li>
+                                    <li>Data used can be collected by students or previously published by someone else (if the data is
+                                        published, the source must be cited in the poster)</li>
+                                    <li>Posters can be in <b>any language</b></li>
+                                    <li>Posters <b>must be blind</b> i.e. they must not contain any information about students or schools who have
+                                        submitted them <i data-toggle="tooltip" class="fa fa-question-circle-o tooltip-question" data-placement="top" title="Our judging system does not show personal information to judges."></i></li>
+                                    <li>Posters from previous international competitions are not allowed</li>
+                                    <li>Posters must be the original design and creation of students</li>
+                                    <li>Posters must be two-dimensional (one single sheet) and one-sided: maximum size is A1 (841 mm x 594
+                                        mm or 33.1 in x 23.4 in) and maximum file size is 10 MB. In case of an electronic poster, the font size
+                                        should be such that if it was printed in A1, it would be readable from 2 metres (7 feet) away.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Other</h3>
+                                <ul>
+                                    <li>Posters received after the established deadline will not be considered for the competition.</li>
+                                    <li>By submitting a poster, students give permission for their work to be displayed at various ISI
+                                        conferences, special events, in publications and promotional material, and in electronic format on the
+                                        internet.</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -326,5 +379,9 @@
     <script>
         window.sr = ScrollReveal();
         sr.reveal('.reveal');
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 @endsection

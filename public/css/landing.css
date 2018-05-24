@@ -165,6 +165,11 @@ form label {
     padding-top: 20px;
 }
 
+.tooltip-question {
+    font-size: 12px;
+    opacity: 0.5;
+}
+
 /*form-control inverted*/
 
 h2 {
