@@ -13,6 +13,9 @@
                 <li class="nav-item {{Request::route()->getName() === 'users' ? "active": ""}}">
                     <a class="nav-link" href="{{url('/portal/users')}}">Users</a>
                 </li>
+                <li class="nav-item {{Request::route()->getName() === 'mentorapplications' ? "active": ""}}">
+                    <a class="nav-link" href="{{url('/portal/mentorapplications')}}">Mentor Applications</a>
+                </li>
             @endif
             @if(request()->user->role === 0 || request()->user->role === 1)
                 <li class="nav-item {{Request::route()->getName() === 'submissions' ? "active": ""}}">

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <header class="masthead text-center text-white">
+    <header class="masthead text-center text-white" id="home">
         <div class="bg-circle-1 bg-circle"></div>
         <div class="bg-circle-2 bg-circle"></div>
         <div class="bg-circle-3 bg-circle"></div>
@@ -20,16 +20,26 @@
                         {{ session('teacher_signup_success') }}
                     </div>
                 @endif
+                @if (session('mentor_signup_error'))
+                    <div class="alert alert-danger">
+                        {{ session('mentor_signup_error') }}
+                    </div>
+                @endif
+                @if (session('mentor_signup_success'))
+                    <div class="alert alert-primary">
+                        {{ session('mentor_signup_success') }}
+                    </div>
+                @endif
                 <h1 class="masthead-heading mb-0">ISLP</h1>
                 <h2 class="masthead-subheading mb-0">Canadian National Statistics Poster Competiton</h2>
                 <h3>Create, Share, Compete</h3>
-                <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">How to Participate</a>
+                <a href="#register" class="btn btn-primary btn-xl rounded-pill mt-5">How to Participate</a>
             </div>
         </div>
     </header>
 
 
-    <section class="reveal">
+    <section class="reveal" id="about">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 order-lg-2">
@@ -39,7 +49,7 @@
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4"><i class="fa fa-question" aria-hidden="true"></i> What is ISLP Poster
+                        <h2 class="display-4"><img src="{{ asset('images/question.jpg') }}" height="100" /> What is ISLP Poster
                             Competition</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
                             sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
@@ -60,7 +70,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">
-                        <h2 class="display-4"><i class="fa fa-pencil" aria-hidden="true"></i> Create, Share, Compete
+                        <h2 class="display-4"><img src="{{ asset('images/drawing.jpg') }}" height="100" /> Create, Share, Compete
                         </h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
                             sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
@@ -71,7 +81,7 @@
         </div>
     </section>
 
-    <section class="invert-section">
+    <section class="invert-section" id="register">
         <div class="container reveal">
             <div class="row align-items-center">
                 <div class="col-lg-12 order-lg-1">
@@ -86,11 +96,12 @@
                                 Participate Today!</h2>
                             <p>Ask your teacher about ISLP national poster competition and participate today! There are
                                 many prizes to be won. The competition is completely free, and you will have a chance to enter ISLP international poster competition!</p>
-                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Sample Posters</a>
+                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5"><i class="fa fa-picture-o" aria-hidden="true"></i> Sample Posters</a>
                             <br><br><br><br>
                             <h3>Undergraduate? Interested in becoming a mentor?</h3>
                             <p>Apply to become a volunteering mentor for ISLP today! Strengthen your statistical skills, and have fun!</p>
-                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Mentor Application</a>
+                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5" id="show-mentor-application-button" onclick="showMentorApplication()"><i class="fa fa-pencil" aria-hidden="true"></i> Mentor Application</a>
+                            @include('partials/mentorregister')
                         </div>
                         <div class="hidden" id="teacher-section">
                             <h2 class="display-4"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Register Your Class</h2>
@@ -100,46 +111,7 @@
                                 All information collected is for the competition only, we never share your information
                                 with anyone else.
                             </p>
-                            <form action="{{ url('/portal/signup/teacher') }}" method="post">
-                                {{ csrf_field() }}
-                                <div class="row">
-                                    <div class="col-md-6 pad-top">
-                                        <label for="teacher-fullname">Full Name *</label>
-                                        <input type="text" name="name" class="form-control inverted" id="teacher-fullname"/>
-                                    </div>
-                                    <div class="col-md-6 pad-top">
-                                        <label for="teacher-email">Email Address (Work) *</label>
-                                        <input type="email" name="email" class="form-control inverted" id="teacher-email"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 pad-top">
-                                        <label for="teacher-subject">Teaching Subject *</label>
-                                        <input type="text" name="teaching_subject" class="form-control inverted" id="teacher-subject"/>
-                                    </div>
-                                    <div class="col-md-6 pad-top">
-                                        <label for="teacher-hear">How did you hear about ISLP? *</label>
-                                        <input type="text" name="heard_from" class="form-control inverted" id="teacher-hear"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 pad-top">
-                                        <label for="teacher-school">School Name *</label>
-                                        <input type="text" name="school" class="form-control inverted" id="teacher-school"/>
-                                    </div>
-                                    <div class="col-md-6 pad-top">
-                                        <label for="teacher-password">Choose a password for your account *</label>
-                                        <input type="password" name="password" class="form-control inverted" id="teacher-password"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 pad-top">
-                                        <label for="teacher-resources">Any additional resources required?</label>
-                                        <input type="text" name="additional_resources" class="form-control inverted" id="teacher-resources"/>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5">Register</button>
-                            </form>
+                            @include('partials/teacherregister')
                         </div>
                     </div>
                 </div>
@@ -147,7 +119,7 @@
         </div>
     </section>
 
-    <section class="reveal">
+    <section class="reveal" id="rules">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 order-lg-1">
@@ -211,7 +183,7 @@
         </div>
     </section>
 
-    <section class="reveal">
+    <section class="reveal" id="schedule">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 order-lg-1">
@@ -242,6 +214,7 @@
     </footer>
 
     <script>
+
         var s = Snap("#header-svg");
         // Lets create big circle in the middle:
         var rects = [];
@@ -249,8 +222,8 @@
             let height = Math.floor((Math.random() * 300) + 100);
             let rect = s.rect(55 * i, 0, 50, 0, 5, 5);
             rect.attr({
-                fill: '#0D47A1',
-                opacity: Math.random()
+                fill: '#c8dae7',
+                opacity: Math.random() * 0.5
             });
 
             setTimeout(function () {
@@ -274,6 +247,12 @@
                 }
             })
         });
+
+        if ($(this).scrollTop() > 200) {
+            $("#primary-nav").addClass("filled");
+        } else {
+            $("#primary-nav").removeClass("filled");
+        }
 
         function switchToStudent(){
             $("#student-button").addClass("active");
@@ -381,7 +360,28 @@
         sr.reveal('.reveal');
 
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+            $('[data-toggle="tooltip"]').tooltip();
+
+        });
+
+        function showMentorApplication(){
+            $("#mentor-application-form").slideDown();
+            $('#show-mentor-application-button')
+                .stop(true, true)
+                .animate({
+                    height:"toggle",
+                    padding: "toggle",
+                    margin: "toggle",
+                    opacity:"toggle"
+                }, 500)
+        }
+
+        $(document).on('click', 'a[href^="#"]', function (event) {
+            event.preventDefault();
+
+            $('html, body').animate({
+                scrollTop: $($.attr(this, 'href')).offset().top
+            }, 500);
+        });
     </script>
 @endsection

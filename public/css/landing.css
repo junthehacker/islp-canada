@@ -45,6 +45,18 @@ header.masthead {
     box-shadow: rgba(0,0,0,0.3) 10px 10px 20px;
 }
 
+.btn-primary:active {
+    background-color: white !important;
+    color: #01579B !important;
+    box-shadow: rgba(0,0,0,0.3) 10px 10px 20px;
+}
+
+.btn-primary:focus {
+    background-color: white !important;
+    color: #01579B;
+    box-shadow: rgba(0,0,0,0.3) 10px 10px 20px;
+}
+
 .pill-header {
     text-align: center;
     padding-bottom: 60px;
@@ -168,6 +180,13 @@ form label {
 .tooltip-question {
     font-size: 12px;
     opacity: 0.5;
+}
+
+.signup-terms-service {
+    font-size: 12px;
+    opacity: 0.5;
+    padding: 0;
+    padding-top: 20px;
 }
 
 /*form-control inverted*/

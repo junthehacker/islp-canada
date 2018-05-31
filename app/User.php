@@ -18,6 +18,10 @@ class User extends Model
         return $this->hasOne('App\Teacher');
     }
 
+    public function mentor(){
+        return $this->hasOne('App\Mentor');
+    }
+
     public function posters(){
         return $this->hasMany('App\Poster');
     }

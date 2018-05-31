@@ -2,7 +2,8 @@
 $roleNames = [
     0 => 'Admin',
     1 => 'Teacher',
-    2 => 'Judge'
+    2 => 'Judge',
+    3 => 'Mentor'
 ]
 ?>
 
