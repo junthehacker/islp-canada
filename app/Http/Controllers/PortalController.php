@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\JudgingRule;
 use App\Poster;
 use App\User;
 use Illuminate\Http\Request;
@@ -106,19 +107,70 @@ class PortalController extends Controller
         }
     }
 
+    /**
+     * Return the manage rubric page
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function rubricPage(Request $request){
-        return view('portal/rubric');
+        $rules = JudgingRule::all();
+        $rule_groups = [];
+        $total_weight = 0;
+        foreach($rules as $rule){
+            if(!in_array($rule->group, $rule_groups)){
+                $rule_groups[] = $rule->group;
+            }
+            $total_weight += $rule->weight;
+        }
+
+        return view('portal/rubric', [
+            'rules' => $rules,
+            'rule_groups' => $rule_groups,
+            'total_weight' => $total_weight
+        ]);
     }
 
+    /**
+     * Return the create rubric rule page
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function createRubricRulePage(Request $request){
         return view('portal/rubric/create');
     }
 
+    /**
+     * Return the edit rubric rule page
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
+    public function editRubricRulePage(Request $request, $id){
+        $rule = JudgingRule::find($id);
+        if($rule){
+            return view('portal/rubric/edit', [
+                'rule' => $rule
+            ]);
+        } else {
+            return "Not found";
+        }
+    }
+
+    /**
+     * Log current user out
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function logout(Request $request){
         session(['uid' => null]);
         return redirect('/portal/login');
     }
 
+    /**
+     * Create a new user
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function createUser(Request $request){
         if($request->user && $request->user->role === 0){
             if(!$request->email || !$request->password || User::where('email', $request->email)->first() || ($request->role != 0 && $request->role != 1 && $request->role != 2)){

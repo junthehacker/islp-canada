@@ -27,8 +27,12 @@ Route::get('/portal/mentorapplications/detail/{id}', 'PortalController@mentorApp
 Route::get('/portal/submissions', 'PortalController@submissionsPage')->name('submissions');
 
 // Rubric routes
-Route::get('/portal/rubric', 'PortalController@rubricPage')->name('rubric');
-Route::get('/portal/rubric/rules/create', 'PortalController@createRubricRulePage')->name('rubric');
+Route::get('/portal/rubric', 'PortalController@rubricPage')->name('rubric')->middleware('admin');
+Route::get('/portal/rubric/rules/create', 'PortalController@createRubricRulePage')->name('rubric')->middleware('admin');
+Route::post('/portal/rubric/rules/create', 'JudgingRuleController@create')->middleware('admin');
+Route::post('/portal/rubric/rules/delete', 'JudgingRuleController@delete')->middleware('admin');
+Route::get('/portal/rubric/rules/edit/{id}', 'PortalController@editRubricRulePage')->name('rubric')->middleware('admin');
+Route::post('/portal/rubric/rules/edit/{id}', 'JudgingRuleController@update')->name('rubric')->middleware('admin');
 
 
 

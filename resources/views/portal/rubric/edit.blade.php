@@ -1,6 +1,6 @@
 @extends('layouts/portal')
 
-@section('title') Create Rubric Rule @endsection
+@section('title') Edit Rubric Rule @endsection
 
 @section('content')
     @include('portal/partials/nav')
@@ -23,34 +23,34 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page"><a href="{{ url('/portal/rubric') }}">Rubric</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Create Rule</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Rule</li>
                     </ol>
                 </nav>
-                <h1>Create Rubric Rule</h1>
+                <h1>Edit Rubric Rule</h1>
                 <form method="post">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-6">
                             <label>Rule Name</label>
                             <p style="font-size: 12px;">Name for this rule.</p>
-                            <input type="text" class="form-control" name="name" /><br>
+                            <input type="text" class="form-control" name="name" value="{{ $rule->name }}" /><br>
                             <label>Maximum Score</label>
                             <p style="font-size: 12px;">Maximum score possible for the rule.</p>
-                            <input type="number" class="form-control" value="100" name="score" /><br>
+                            <input type="number" class="form-control" name="score" value="{{ $rule->score }}" /><br>
                             <label>Weight</label>
                             <p style="font-size: 12px;">Weight for this rule.</p>
-                            <input type="number" class="form-control" value="10" name="weight" /><br>
+                            <input type="number" class="form-control" name="weight" value="{{ $rule->weight }}" /><br>
                         </div>
                         <div class="col-md-6">
                             <label>Rule Description</label>
                             <p style="font-size: 12px;">An description for the rule.</p>
-                            <textarea class="form-control" name="description"></textarea><br>
+                            <textarea class="form-control" name="description">{{ $rule->description }}</textarea><br>
                             <label>Group</label>
                             <p style="font-size: 12px;">Group for this rule.</p>
-                            <input type="text" class="form-control" value="Ungrouped" name="group" /><br>
+                            <input type="text" class="form-control" value="{{ $rule->group }}" name="group" /><br>
                         </div>
                         <div class="col-md-12">
-                            <button class="btn btn-primary">Create</button>
+                            <button class="btn btn-primary">Save</button>
                         </div>
                     </div>
 

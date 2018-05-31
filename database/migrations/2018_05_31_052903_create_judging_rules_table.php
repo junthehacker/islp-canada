@@ -15,6 +15,11 @@ class CreateJudgingRulesTable extends Migration
     {
         Schema::create('judging_rules', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('name');
+            $table->integer('score');
+            $table->integer('weight');
+            $table->text('description');
+            $table->text('group');
             $table->timestamps();
         });
     }
