@@ -48,7 +48,15 @@ $roleNames = [
                             <td>{{$user->email}}</td>
                             <td>{{$roleNames[$user->role]}}</td>
                             <td>
-                                <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item"><i class="fa fa-external-link" aria-hidden="true"></i> View Detail</button>
+                                        <button class="dropdown-item"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

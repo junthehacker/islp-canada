@@ -47,8 +47,6 @@ $roleNames = [
                     <hr>
                     <h2><i class="fa fa-balance-scale" aria-hidden="true"></i> Judging</h2>
                     <p>Judging is currently disabled.</p>
-                    <button class="btn btn-primary">Manage Judges</button>
-                    <button class="btn btn-primary">Enable Judging</button>
                     <a href="{{ url('/portal/rubric') }}"><button class="btn btn-primary">Manage Rubric</button></a>
                 </div>
             @endif
