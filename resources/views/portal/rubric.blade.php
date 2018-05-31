@@ -22,7 +22,7 @@
                     </ol>
                 </nav>
                 <h1>Manage Rubric</h1>
-                <a href="{{ url('/portal/rubric/rules/create') }}"><button class="btn btn-primary">Create New Rule</button></a>
+                <a href="{{ url('/portal/rubric/rules/create') }}"><button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Create New Rule</button></a>
                 <hr>
                 <table class="table">
                     <thead>

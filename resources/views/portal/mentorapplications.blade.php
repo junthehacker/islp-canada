@@ -52,16 +52,16 @@
                                                     Actions
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{ url('/portal/mentorapplications/detail/' . $mentor->id) }}">View Detail</a>
+                                                    <a class="dropdown-item" href="{{ url('/portal/mentorapplications/detail/' . $mentor->id) }}"><i class="fa fa-external-link" aria-hidden="true"></i> View Detail</a>
                                                     <form method="post" action="{{ url('/portal/mentors/approve') }}">
                                                         {{ csrf_field() }}
                                                         <input type="hidden" name="id" value="{{ $mentor->id }}" />
-                                                        <button class="dropdown-item">Approve</button>
+                                                        <button class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</button>
                                                     </form>
                                                     <form method="post" action="{{ url('/portal/mentors/decline') }}">
                                                         {{ csrf_field() }}
                                                         <input type="hidden" name="id" value="{{ $mentor->id }}" />
-                                                        <button class="dropdown-item">Decline</button>
+                                                        <button class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Decline</button>
                                                     </form>
                                                 </div>
                                             </div>
