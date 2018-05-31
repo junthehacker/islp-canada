@@ -8,7 +8,12 @@
     <div class="container-fluid main-container">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ url('/portal/mentorapplications') }}">Back to Applications List</a>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item" aria-current="page"><a href="{{ url('/portal/mentorapplications') }}">Mentor Applications</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $mentor->id }}</li>
+                    </ol>
+                </nav>
                 @if($mentor && $mentor->role === 3 && $mentor->mentor->accepted === 0)
                     <h1>Application # {{ $mentor->id }}</h1>
                     <div class="row">

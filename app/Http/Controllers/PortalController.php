@@ -106,6 +106,14 @@ class PortalController extends Controller
         }
     }
 
+    public function rubricPage(Request $request){
+        return view('portal/rubric');
+    }
+
+    public function createRubricRulePage(Request $request){
+        return view('portal/rubric/create');
+    }
+
     public function logout(Request $request){
         session(['uid' => null]);
         return redirect('/portal/login');

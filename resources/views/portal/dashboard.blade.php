@@ -16,6 +16,11 @@ $roleNames = [
     <div class="container-fluid main-container">
         <div class="row">
             <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    </ol>
+                </nav>
                 <h1>Dashboard</h1>
                 <h3>Your are logged in as {{ $roleNames[request()->user->role] }}</h3>
             </div>
@@ -44,7 +49,7 @@ $roleNames = [
                     <p>Judging is currently disabled.</p>
                     <button class="btn btn-primary">Manage Judges</button>
                     <button class="btn btn-primary">Enable Judging</button>
-                    <button class="btn btn-primary">Manage Rubric</button>
+                    <a href="{{ url('/portal/rubric') }}"><button class="btn btn-primary">Manage Rubric</button></a>
                 </div>
             @endif
             @if(request()->user->role === 1)

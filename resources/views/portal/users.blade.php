@@ -16,6 +16,11 @@ $roleNames = [
     <div class="container-fluid main-container">
         <div class="row">
             <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Users</li>
+                    </ol>
+                </nav>
                 @if (session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}

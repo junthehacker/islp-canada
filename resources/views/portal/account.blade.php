@@ -14,6 +14,11 @@ $roleNames = [
 @section('content')
     @include('portal/partials/nav')
     <div class="container-fluid main-container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Account</li>
+            </ol>
+        </nav>
         <h1>ISLP Account</h1>
         <div class="row">
             <div class="col-md-6">

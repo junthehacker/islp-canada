@@ -18,6 +18,11 @@
         @endif
         <div class="row">
             <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Submissions</li>
+                    </ol>
+                </nav>
                 <h1>Submissions</h1>
                 @if (request()->user->role === 1)
                     <button class="btn btn-primary" data-toggle="modal" data-target="#addPosterModal"><i class="fa fa-plus"

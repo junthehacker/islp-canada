@@ -25,6 +25,13 @@ Route::get('/portal/users', 'PortalController@usersPage')->name('users')->middle
 Route::get('/portal/mentorapplications', 'PortalController@mentorApplicationsPage')->name('mentorapplications')->middleware('admin');
 Route::get('/portal/mentorapplications/detail/{id}', 'PortalController@mentorApplicationDetailsPage')->name('mentorapplications')->middleware('admin');
 Route::get('/portal/submissions', 'PortalController@submissionsPage')->name('submissions');
+
+// Rubric routes
+Route::get('/portal/rubric', 'PortalController@rubricPage')->name('rubric');
+Route::get('/portal/rubric/rules/create', 'PortalController@createRubricRulePage')->name('rubric');
+
+
+
 Route::post('/portal/logout', 'PortalController@logout')->name('logout');
 Route::post('/portal/users/create', 'PortalController@createUser')->name('createUser');
 Route::post('/portal/posters/create', 'PosterController@create')->name('createPoster');
