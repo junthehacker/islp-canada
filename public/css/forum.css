@@ -1,0 +1,64 @@
+.post-overview-card {
+    box-shadow: rgba(0,0,0,0.1) 3px 3px 10px;
+    padding: 20px;
+    border: #ececec 1px solid;
+    border-radius: 6px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+.post-overview-card:hover {
+    box-shadow: rgba(0,0,0,0.1) 5px 5px 10px;
+    transition: all ease 0.3s;
+}
+
+.btn-primary {
+    color: black;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+h3 {
+    padding-top: 30px;
+}
+
+.form-control {
+    border-bottom: #969696 2px solid !important;
+    margin-bottom: 20px;
+}
+
+.text-muted {
+    font-size: 12px;
+}
+
+.post-meta {
+    opacity: 0.7;
+}
+
+label {
+    padding-top: 20px;
+}
+
+.post-overview-card .meta {
+    opacity: 0.5;
+}
+
+
+.post-overview-card .icon-labels span {
+    opacity: 0.7;
+    transition: all ease 0.4s;
+}
+
+
+.post-overview-card .icon-labels span:hover {
+    opacity: 1;
+    transition: all ease 0.4s;
+}
+
+
+.post-overview-card .icon-labels .pinned {
+    color: red;
+}

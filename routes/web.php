@@ -34,6 +34,10 @@ Route::post('/portal/rubric/rules/delete', 'JudgingRuleController@delete')->midd
 Route::get('/portal/rubric/rules/edit/{id}', 'PortalController@editRubricRulePage')->name('rubric')->middleware('admin');
 Route::post('/portal/rubric/rules/edit/{id}', 'JudgingRuleController@update')->name('rubric')->middleware('admin');
 
+// Forum
+Route::get('/forum', 'ForumController@home');
+Route::get('/forum/new', 'ForumController@new');
+Route::get('/forum/posts/{id}', 'ForumController@post');
 
 
 Route::post('/portal/logout', 'PortalController@logout')->name('logout');
