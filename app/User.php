@@ -10,28 +10,48 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class User
+ * @package App
+ */
 class User extends Model
 {
-    //
-
-    protected $fillable = ['email', 'password', 'role'];
 
     /**
-     * Get the teacher object associated
-     * @return \App\Teacher
+     * Fillable properties
+     * @var array
+     */
+    protected $fillable = ['email', 'password', 'role'];
+
+
+    /**
+     * Get teacher (if role is teacher)
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function teacher(){
         return $this->hasOne('App\Teacher');
     }
 
+    /**
+     * Get mentor (if role is mentor)
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function mentor(){
         return $this->hasOne('App\Mentor');
     }
 
+    /**
+     * Get posters (if role is teacher)
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function posters(){
         return $this->hasMany('App\Poster');
     }
 
+    /**
+     * Get judging_results (if role is judge)
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function judging_results(){
         return $this->hasMany('App\JudgingResult');
     }
