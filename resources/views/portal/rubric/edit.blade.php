@@ -22,7 +22,8 @@
                 @endif
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item" aria-current="page"><a href="{{ url('/portal/rubric') }}">Rubric</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('/portal/rubric') }}">Rubric</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('/portal/rubric/' . $competition->id) }}">{{ $competition->name }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Edit Rule</li>
                     </ol>
                 </nav>

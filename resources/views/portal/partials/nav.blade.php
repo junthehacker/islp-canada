@@ -10,6 +10,12 @@
                 <a class="nav-link" href="{{url('/portal/dashboard')}}">Dashboard</a>
             </li>
             @if(request()->user->role === 0)
+                <li class="nav-item {{Request::route()->getName() === 'competitions' ? "active": ""}}">
+                    <a class="nav-link" href="{{url('/portal/competitions')}}">Competitions</a>
+                </li>
+                <li class="nav-item {{Request::route()->getName() === 'judging' ? "active": ""}}">
+                    <a class="nav-link" href="{{url('/portal/judging')}}">Judging</a>
+                </li>
                 <li class="nav-item {{Request::route()->getName() === 'users' ? "active": ""}}">
                     <a class="nav-link" href="{{url('/portal/users')}}">Users</a>
                 </li>

@@ -18,7 +18,7 @@ class AdminOnlyMiddleware
         if($request->user && $request->user->role === 0) {
             return $next($request);
         } else {
-            return "Not Authorized";
+            return response(view('errors/401'), 401);
         }
     }
 }

@@ -25,35 +25,47 @@
                 </nav>
                 <h1>Submissions</h1>
                 @if (request()->user->role === 1)
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#addPosterModal"><i class="fa fa-plus"
-                                                                                                         aria-hidden="true"></i>
-                        Submit New Poster
-                    </button>
+                    @if($current_competition && $current_competition->status === 'accept_submissions')
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#addPosterModal"><i
+                                    class="fa fa-plus"
+                                    aria-hidden="true"></i>
+                            Submit New Poster to {{ $current_competition->name }}
+                        </button>
+                    @else
+                        <p>There is no competition that accepts new submissions.</p>
+                    @endif
                 @endif
             </div>
             @if (request()->user->role === 1)
                 <div class="col-md-12">
                     <hr>
                     <h3>My Submissions ({{count(request()->user->posters)}})</h3>
-                    <div class="row">
-                        @foreach(request()->user->posters as $poster)
-                            <div class="col-lg-3 col-md-6" style="overflow-y: hidden;">
-                                <h4>{{$poster->title}}</h4>
-                                <form>
-                                    {{ csrf_field() }}
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
-                                <p>
-                                    Student: {{$poster->student_name}}<br>
-                                    Submitted on: {{ date('Y/m/d', strtotime($poster->created_at)) }}
-                                </p>
-                                <a href="#" onclick="openBase64NewTab('{{$poster->image_base64}}')"><img
-                                            src="{{$poster->image_base64}}"
-                                            style="max-height: 200px; max-width: 100%;"/></a>
-                                <hr>
-                            </div>
-                        @endforeach
-                    </div>
+                    @foreach($competitions as $competition)
+                        <hr>
+                        <h4>{{ $competition->name }} <span
+                                    class="badge badge-secondary">{{ $competition->status }}</span></h4>
+                        <div class="row">
+                            @foreach(request()->user->posters as $poster)
+                                @if($poster->competition_id === $competition->id)
+                                    <div class="col-lg-3 col-md-6" style="overflow-y: hidden;">
+                                        <h5>{{$poster->title}}</h5>
+                                        <form>
+                                            {{ csrf_field() }}
+                                            <button class="btn btn-danger" @if($competition->status !== 'accept_submissions') disabled @endif>Delete</button>
+                                        </form>
+                                        <p>
+                                            Student: {{$poster->student_name}}<br>
+                                            Submitted on: {{ date('Y/m/d', strtotime($poster->created_at)) }}
+                                        </p>
+                                        <a href="#" onclick="openBase64NewTab('{{$poster->image_base64}}')"><img
+                                                    src="{{$poster->image_base64}}"
+                                                    style="max-height: 200px; max-width: 100%;"/></a>
+                                        <hr>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endforeach
                 </div>
             @endif
             @if (request()->user->role === 0)
@@ -73,16 +85,18 @@
                         </thead>
                         <tbody>
                         @foreach($posters as $poster)
-                        <tr>
-                            <th scope="row">{{$poster->id}}</th>
-                            <td>{{$poster->title}}</td>
-                            <td>{{$poster->user->teacher->school}}</td>
-                            <td>{{$poster->student_name}}</td>
-                            <td>{{ date('Y/m/d', strtotime($poster->created_at)) }}</td>
-                            <td>
-                                <button class="btn btn-primary" onclick="openBase64NewTab('{{$poster->image_base64}}')">View Submission</button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <th scope="row">{{$poster->id}}</th>
+                                <td>{{$poster->title}}</td>
+                                <td>{{$poster->user->teacher->school}}</td>
+                                <td>{{$poster->student_name}}</td>
+                                <td>{{ date('Y/m/d', strtotime($poster->created_at)) }}</td>
+                                <td>
+                                    <button class="btn btn-primary"
+                                            onclick="openBase64NewTab('{{$poster->image_base64}}')">View Submission
+                                    </button>
+                                </td>
+                            </tr>
                         @endforeach
                         </tbody>
                     </table>

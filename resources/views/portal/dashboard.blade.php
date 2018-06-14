@@ -34,6 +34,7 @@ $roleNames = [
                 <div class="col-md-4">
                     <hr>
                     <h2><i class="fa fa-file-text" aria-hidden="true"></i> Submissions</h2>
+                    <p>All submissions, including archived competitions.</p>
                     <div class="large-dashboard-num">{{ count($posters) }}</div>
                     <a href="{{ url('/portal/submissions') }}"><button class="btn btn-primary">Manage Submissions</button></a>
                 </div>

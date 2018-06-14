@@ -1,4 +1,10 @@
 <?php
+/**
+ * Copyright (c) 2018. Jun Zheng All Rights Reserved
+ * I hereby grant the usage of this software to SOC (Statistical Society of Canada).
+ *
+ * Issue with the software? Contact juncapersonal at gmail dot com.
+ */
 
 /*
 |--------------------------------------------------------------------------
@@ -28,17 +34,27 @@ Route::get('/portal/submissions', 'PortalController@submissionsPage')->name('sub
 
 // Rubric routes
 Route::get('/portal/rubric', 'PortalController@rubricPage')->name('rubric')->middleware('admin');
-Route::get('/portal/rubric/rules/create', 'PortalController@createRubricRulePage')->name('rubric')->middleware('admin');
-Route::post('/portal/rubric/rules/create', 'JudgingRuleController@create')->middleware('admin');
-Route::post('/portal/rubric/rules/delete', 'JudgingRuleController@delete')->middleware('admin');
-Route::get('/portal/rubric/rules/edit/{id}', 'PortalController@editRubricRulePage')->name('rubric')->middleware('admin');
-Route::post('/portal/rubric/rules/edit/{id}', 'JudgingRuleController@update')->name('rubric')->middleware('admin');
+Route::get('/portal/rubric/{id}', 'PortalController@rubricListingPage')->name('rubric')->middleware('admin');
+Route::get('/portal/rubric/{competition_id}/rules/create', 'PortalController@createRubricRulePage')->name('rubric')->middleware('admin');
+Route::post('/portal/rubric/{competition_id}/rules/create', 'JudgingRuleController@create')->name('rubric')->middleware('admin');
+Route::post('/portal/rubric/{competition_id}/rules/delete', 'JudgingRuleController@delete')->name('rubric')->middleware('admin');
+Route::get('/portal/rubric/{competition_id}/rules/edit/{id}', 'PortalController@editRubricRulePage')->name('rubric')->middleware('admin');
+Route::post('/portal/rubric/{competition_id}/rules/edit/{id}', 'JudgingRuleController@update')->name('rubric')->middleware('admin');
 
 // Forum
 Route::get('/forum', 'ForumController@home');
 Route::get('/forum/new', 'ForumController@new');
 Route::get('/forum/posts/{id}', 'ForumController@post');
 
+// Competition routes
+Route::get('/portal/competitions', 'PortalController@competitionsPage')->name('competitions')->middleware('admin');
+Route::post('/portal/competitions/create', 'CompetitionController@create')->name('createCompetition')->middleware('admin');
+Route::post('/portal/competitions/status/update/{id}', 'CompetitionController@updateStatus')->name('updateCompetitionStatus')->middleware('admin');
+
+
+// Judging
+Route::get('/portal/judging', 'PortalController@judgingPage')->name('judging')->middleware('admin');
+Route::post('/portal/judging/autoassign', 'JudgingResultController@autoAssign')->name('judging')->middleware('admin');
 
 Route::post('/portal/logout', 'PortalController@logout')->name('logout');
 Route::post('/portal/users/create', 'PortalController@createUser')->name('createUser');
