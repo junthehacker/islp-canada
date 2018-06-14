@@ -59,10 +59,13 @@ class PortalController extends Controller
                     'users' => User::all(),
                     'posters' => Poster::all(),
                     'mentors' => $mentors,
-                    'pending_mentor_app_count' => $pending_mentor_app_count
+                    'pending_mentor_app_count' => $pending_mentor_app_count,
+                    'competition' => $this->_getCurrentCompetition()
                 ]);
             }
-            return view('portal/dashboard');
+            return view('portal/dashboard', [
+                'competition' => $this->_getCurrentCompetition()
+            ]);
         } else {
             return redirect('/portal/login');
         }
