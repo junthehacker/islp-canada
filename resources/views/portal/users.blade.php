@@ -32,6 +32,8 @@ $roleNames = [
                     </div>
                 @endif
                 <h1>Users</h1>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">Create User</button>
+                <br><br>
                 <table class="table table-striped">
                     <thead>
                     <tr>

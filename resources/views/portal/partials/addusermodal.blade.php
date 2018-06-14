@@ -22,7 +22,6 @@
                         <label>User Role</label>
                         <select name="role" class="form-control">
                             <option value="0">Admin</option>
-                            <option value="1">Teacher</option>
                             <option value="2">Judge</option>
                         </select>
                     </div>
