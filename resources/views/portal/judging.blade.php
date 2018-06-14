@@ -32,7 +32,11 @@
                 <div class="col-md-4">
                     <hr>
                     <h2><i class="fa fa-briefcase" aria-hidden="true"></i> Judge Workload</h2>
-                    <div class="large-dashboard-num">{{ round(count($competition->posters) / count($judges), 2)  }}</div>
+                    @if(count($judges) > 0)
+                        <div class="large-dashboard-num">{{ round(count($competition->posters) / count($judges), 2)  }}</div>
+                    @else
+                        <p>No judges</p>
+                    @endif
                     <a href="{{ url('/portal/users') }}">
                         <button class="btn btn-primary">Manage Users</button>
                     </a>
