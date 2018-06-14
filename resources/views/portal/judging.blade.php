@@ -78,6 +78,7 @@
                             @foreach($poster->judging_results as $result)
                                 @if($result->result)
                                     <span class="badge badge-success">Scored</span>
+                                    <span class="badge badge-success">{{ $result->result['final_percentage'] * 100 }} %</span>
                                 @else
                                     <span class="badge badge-warning">Pending</span>
                                 @endif
