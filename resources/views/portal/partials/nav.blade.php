@@ -26,6 +26,11 @@
                     <a class="nav-link" href="{{url('/portal/rubric')}}">Rubric</a>
                 </li>
             @endif
+            @if(request()->user->role === 2)
+                <li class="nav-item {{Request::route()->getName() === 'judge' ? "active": ""}}">
+                    <a class="nav-link" href="{{url('/portal/judge')}}">Judge</a>
+                </li>
+            @endif
             @if(request()->user->role === 0 || request()->user->role === 1)
                 <li class="nav-item {{Request::route()->getName() === 'submissions' ? "active": ""}}">
                     <a class="nav-link" href="{{url('/portal/submissions')}}">Submissions</a>

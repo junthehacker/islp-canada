@@ -33,4 +33,13 @@ class JudgingResult extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function getResultAttribute($value)
+    {
+        if($value){
+            return json_decode($value, true);
+        } else {
+            return null;
+        }
+    }
 }

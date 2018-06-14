@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Competition;
+use App\JudgingResult;
 use App\JudgingRule;
 use App\Poster;
 use App\User;
@@ -302,6 +303,100 @@ class PortalController extends Controller
             'judges' => User::where('role', 2)->get(),
             'competition' => $competition
         ]);
+    }
+
+    public function judgeWarning(Request $request)
+    {
+        if ($request->user->role !== 2) {
+            return response("401", 401);
+        } else {
+            return view('portal/judge/warning', [
+                'competition' => $this->_getCurrentCompetition()
+            ]);
+        }
+    }
+
+    public function judgePoster(Request $request, $id)
+    {
+        $result = JudgingResult::find($id);
+        $competition = $this->_getCurrentCompetition();
+
+        $rules = $competition->judging_rules;
+        $rule_groups = [];
+        $total_weight = 0;
+        foreach ($rules as $rule) {
+            if (!in_array($rule->group, $rule_groups)) {
+                $rule_groups[] = $rule->group;
+            }
+            $total_weight += $rule->weight;
+        }
+        if (!$competition) {
+            return response("Competition not found.", 404);
+        }
+
+
+        if ($result && $result->user_id === $request->user->id && $competition && $competition->id === $result->poster->competition_id) {
+            return view('portal/judge/judge', [
+                'competition' => $competition,
+                'result' => $result,
+                'rules' => $rules,
+                'rule_groups' => $rule_groups,
+                'total_weight' => $total_weight
+            ]);
+        } else {
+            return response("401", 401);
+        }
+    }
+
+    public function judgeSubmit(Request $request, $id){
+        $result = JudgingResult::find($id);
+        $competition = $this->_getCurrentCompetition();
+
+        $rules = $competition->judging_rules;
+        $rule_groups = [];
+        $total_weight = 0;
+        foreach ($rules as $rule) {
+            if (!in_array($rule->group, $rule_groups)) {
+                $rule_groups[] = $rule->group;
+            }
+            $total_weight += $rule->weight;
+        }
+        if (!$competition) {
+            return response("Competition not found.", 404);
+        }
+
+
+        if ($result && $result->user_id === $request->user->id && $competition && $competition->id === $result->poster->competition_id) {
+            $final_weight = 0;
+            $detailed_result = [];
+            foreach($rules as $rule){
+                $rule_percentage = $request->input('score-' . $rule->id) / $rule->score;
+                $rule_weight = $rule_percentage * $rule->weight;
+                $final_weight += $rule_weight;
+                $detailed_result[$rule->id] = $request->input('score-' . $rule->id);
+            }
+            $result->result = json_encode([
+                'detail' => $detailed_result,
+                'final_weight' => $final_weight,
+                'final_percentage' => $final_weight / $total_weight,
+                'notes' => $request->input('notes')
+            ]);
+            $result->save();
+            return redirect('/portal/judge/list');
+        } else {
+            return response("401", 401);
+        }
+    }
+
+    public function judgeList(Request $request)
+    {
+        if ($request->user->role !== 2) {
+            return response("401", 401);
+        } else {
+            return view('portal/judge/list', [
+                'competition' => $this->_getCurrentCompetition()
+            ]);
+        }
     }
 
     /**

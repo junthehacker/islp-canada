@@ -80,7 +80,9 @@ $roleNames = [
                         </div>
                         <div class="large-dashboard-num">{{ count(request()->user->judging_results) }}</div>
                         @if($competition->status === 'begin_judging')
-                            <button class="btn btn-primary">Go to judging system</button>
+                            <a href="{{ url('portal/judge') }}">
+                                <button class="btn btn-primary">Go to judging system</button>
+                            </a>
                         @else
                             <div class="alert alert-light">Judging is currently disabled.</div>
                         @endif

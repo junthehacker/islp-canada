@@ -56,6 +56,12 @@ Route::post('/portal/competitions/status/update/{id}', 'CompetitionController@up
 Route::get('/portal/judging', 'PortalController@judgingPage')->name('judging')->middleware('admin');
 Route::post('/portal/judging/autoassign', 'JudgingResultController@autoAssign')->name('judging')->middleware('admin');
 
+// Judge
+Route::get('/portal/judge', 'PortalController@judgeWarning')->name('judge');
+Route::get('/portal/judge/list', 'PortalController@judgeList')->name('judge');
+Route::get('/portal/judge/judge/{id}', 'PortalController@judgePoster')->name('judge');
+Route::post('/portal/judge/judge/{id}', 'PortalController@judgeSubmit')->name('judge');
+
 Route::post('/portal/logout', 'PortalController@logout')->name('logout');
 Route::post('/portal/users/create', 'PortalController@createUser')->name('createUser');
 Route::post('/portal/posters/create', 'PosterController@create')->name('createPoster');
