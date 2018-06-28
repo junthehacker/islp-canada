@@ -15,6 +15,8 @@
 
 ### Step-by-Step Guide
 
+**This guide assumes UNIX like environment such as Linux and macOS.**
+
 First make sure your system met all requirements.
 
 If you are using Apache 2, make sure you have either `.htaccess` or server configured properly to support pretty URLs.
