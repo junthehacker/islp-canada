@@ -2,25 +2,29 @@
 
 @section('content')
     <h1>All Posts</h1>
-    <button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Create New Post</button>
-    <h3>General Discussion</h3>
-    <div class="post-overview-card">
-        <div class="row">
-            <div class="col-md-6">
-                Who can join the competition? I am confused.
-                <div class="icon-labels">
-                    <span class="pinned"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Pinned</span>
+    <a href="{{ url('forum/new') }}">
+        <button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Create New Post</button>
+    </a>
+    @foreach($channels as $channel)
+        <h3>{{ $channel->name }}</h3>
+        @foreach($channel->forum_posts as $post)
+            @if(!$post->forum_post_id)
+                <div class="post-overview-card">
+                    <a href="{{ url('forum/posts/' . $post->id) }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ $post->title }}
+                            </div>
+                            <div class="col-md-3 meta">
+                                {{ explode('@', $post->user->email)[0] }}#{{ $post->user->id }}
+                            </div>
+                            <div class="col-md-3 meta">
+                                {{ count($post->forum_posts) }} Reply(s), {{ $post->updated_at->diffForHumans() }}
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </div>
-            <div class="col-md-3 meta">
-                @me16
-            </div>
-            <div class="col-md-3 meta">
-                7 Reply(s), Yesterday
-            </div>
-        </div>
-    </div>
-    <h3>Competition Rules</h3>
-    <h3>Logistics</h3>
-    <h3>Random</h3>
+            @endif
+        @endforeach
+    @endforeach
 @endsection

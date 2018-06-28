@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class ForumController extends Controller
 {
     public function home(){
-        return view('forum/home');
+        return view('forum/home', [
+            'channels' => ForumChannel::all()
+        ]);
     }
 
     public function new(Request $request){

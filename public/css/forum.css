@@ -9,6 +9,14 @@
     transition: all ease 0.3s;
 }
 
+.post-overview-card a:link {
+    color: black !important;
+}
+
+.post-overview-card a:visited {
+    color: black !important;
+}
+
 .post-overview-card:hover {
     box-shadow: rgba(0,0,0,0.1) 5px 5px 10px;
     transition: all ease 0.3s;

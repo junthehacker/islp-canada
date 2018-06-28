@@ -53,6 +53,7 @@ Route::post('/portal/forum/channels/disable', 'ForumChannelController@disable')-
 // Forum
 Route::get('/forum', 'ForumController@home');
 Route::get('/forum/new', 'ForumController@new');
+Route::post('/forum/new', 'ForumPostController@create');
 Route::get('/forum/posts/{id}', 'ForumController@post');
 
 // Competition routes
