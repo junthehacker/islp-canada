@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Competition;
+use App\ForumChannel;
 use App\JudgingResult;
 use App\JudgingRule;
 use App\Poster;
@@ -432,5 +433,11 @@ class PortalController extends Controller
         } else {
             return back()->with('error', 'not authorized');
         }
+    }
+
+    public function forumPage(Request $request){
+        return view('portal/forum/manage', [
+            'channels' => ForumChannel::all()
+        ]);
     }
 }

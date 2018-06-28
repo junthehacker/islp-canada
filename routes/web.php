@@ -41,6 +41,15 @@ Route::post('/portal/rubric/{competition_id}/rules/delete', 'JudgingRuleControll
 Route::get('/portal/rubric/{competition_id}/rules/edit/{id}', 'PortalController@editRubricRulePage')->name('rubric')->middleware('admin');
 Route::post('/portal/rubric/{competition_id}/rules/edit/{id}', 'JudgingRuleController@update')->name('rubric')->middleware('admin');
 
+// Forum management routes
+Route::get('/portal/forum', 'PortalController@forumPage')->name('forum')->middleware('admin');
+Route::post('/portal/forum/channels', 'ForumChannelController@create')->middleware('admin');
+Route::post('/portal/forum/channels/delete', 'ForumChannelController@delete')->middleware('admin');
+Route::post('/portal/forum/channels/enable', 'ForumChannelController@enable')->middleware('admin');
+Route::post('/portal/forum/channels/disable', 'ForumChannelController@disable')->middleware('admin');
+
+
+
 // Forum
 Route::get('/forum', 'ForumController@home');
 Route::get('/forum/new', 'ForumController@new');

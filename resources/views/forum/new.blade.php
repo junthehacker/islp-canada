@@ -10,8 +10,13 @@
         <textarea class="form-control" style="height: 200px;"></textarea>
         <label>Channel to Post</label>
         <select class="form-control">
-            <option>General</option>
+            @forelse($channels as $channel)
+                <option>{{ $channel->name }}</option>
+            @empty
+                <option>No channel available</option>
+            @endforelse
         </select>
+        <label>Posting as {{ explode('@', request()->user->email)[0] }}#{{ request()->user->id }}</label>
     </form>
     <button class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i> Post</button>
 @endsection

@@ -25,6 +25,9 @@
                 <li class="nav-item {{Request::route()->getName() === 'rubric' ? "active": ""}}">
                     <a class="nav-link" href="{{url('/portal/rubric')}}">Rubric</a>
                 </li>
+                <li class="nav-item {{Request::route()->getName() === 'forum' ? "active": ""}}">
+                    <a class="nav-link" href="{{url('/portal/forum')}}">Forum</a>
+                </li>
             @endif
             @if(request()->user->role === 2)
                 <li class="nav-item {{Request::route()->getName() === 'judge' ? "active": ""}}">
