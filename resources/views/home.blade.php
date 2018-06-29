@@ -96,7 +96,7 @@
                                 Participate Today!</h2>
                             <p>Ask your teacher about ISLP national poster competition and participate today! There are
                                 many prizes to be won. The competition is completely free, and you will have a chance to enter ISLP international poster competition!</p>
-                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5"><i class="fa fa-picture-o" aria-hidden="true"></i> Sample Posters</a>
+                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5" onclick="openPhotoSwipe()"><i class="fa fa-picture-o" aria-hidden="true"></i> Sample Posters</a>
                             <br><br><br><br>
                             <h3>Undergraduate? Interested in becoming a mentor?</h3>
                             <p>Apply to become a volunteering mentor for ISLP today! Strengthen your statistical skills, and have fun!</p>

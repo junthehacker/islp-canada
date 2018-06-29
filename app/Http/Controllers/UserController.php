@@ -84,26 +84,26 @@ class UserController extends Controller
 
     public function createMentorAccount(Request $request){
         if(strlen($request->input('password')) < 8){
-            return back()->with('mentor_signup_error', 'Password must be at least 8 characters long.');
+            return "Password must be at least 8 characters long.";
         }
         $user = User::where('email', $request->input('email'))->first();
         if($user){
-            return back()->with('mentor_signup_error', 'Email address is already used by another user.');
+            return "Email address is already used by another user.";
         }
         if(!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)){
-            return back()->with('mentor_signup_error', 'Please enter a valid email address.');
+            return "Please enter a valid email address.";
         }
         if(!$request->name){
-            return back()->with('mentor_signup_error', 'Name is a required field.');
+            return "Name is a required field.";
         }
         if(!$request->school){
-            return back()->with('mentor_signup_error', 'School is a required field.');
+            return "School is a required field.";
         }
         if(!$request->major_area){
-            return back()->with('mentor_signup_error', 'Major area is a required field');
+            return "Major area is a required field.";
         }
         if(!$request->reason){
-            return back()->with('mentor_signup_error', 'Reason is a required field.');
+            return "Reason is a required field";
         }
 
         $user = new User();
@@ -120,7 +120,6 @@ class UserController extends Controller
         $mentor->user_id = $user->id;
         $mentor->save();
 
-        return back()->with('mentor_signup_success', 'Registration successful, you can now login.');
-
+        return "ok";
     }
 }

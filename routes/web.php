@@ -81,4 +81,3 @@ Route::post('/portal/mentors/decline', 'PortalController@declineMentor')->name('
 
 Route::post('/portal/login', 'UserController@authenticate');
 Route::post('/portal/signup/teacher', 'UserController@createTeacherAccount');
-Route::post('/portal/signup/mentor', 'UserController@createMentorAccount');

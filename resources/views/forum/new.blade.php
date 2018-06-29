@@ -23,4 +23,5 @@
         <br />
         <button class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i> Post</button>
     </form>
+    <br><br>
 @endsection

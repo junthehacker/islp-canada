@@ -20,12 +20,19 @@
         <link href="{{ asset('css/landing.css') }}" rel="stylesheet" />
         <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 
+        <!--PhotoSwipe-->
+        <link rel="stylesheet" href="{{ asset('vendor/photoswipe/photoswipe.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/photoswipe/default-skin/default-skin.css') }}">
+        <script src="{{ asset('vendor/photoswipe/photoswipe.min.js') }}"></script>
+        <script src="{{ asset('vendor/photoswipe/photoswipe-ui-default.min.js') }}"></script>
     </head>
     <body>
 
         @include('partials/nav')
 
         @yield('content')
+
+        @include('partials/pswp')
 
     </body>
 </html>
