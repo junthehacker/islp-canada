@@ -41,7 +41,7 @@ class ForumPostController extends Controller
 
         $post = new ForumPost();
         $post->title = $request->input('title');
-        $post->content = $request->input('content');
+        $post->content = htmlentities($request->input('content'));
         $post->user_id = $request->user->id;
         $post->forum_channel_id = $request->input('forum_channel_id');
         // TODO: Check if post exist

@@ -5,20 +5,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item {{Request::route()->getName() === 'landing.home' ? "active": ""}}">
-                    <a class="nav-link" href="#home" data-toggle="collapse" data-target=".navbar-collapse.show"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/') }}"><i class="fa fa-caret-left" aria-hidden="true"></i> Landing</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about" data-toggle="collapse" data-target=".navbar-collapse.show"><i class="fa fa-info" aria-hidden="true"></i> About</a>
+                    <a class="nav-link" href="{{ url('forum') }}"><i class="fa fa-home" aria-hidden="true"></i> Forum Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#register" data-toggle="collapse" data-target=".navbar-collapse.show"><i class="fa fa-pencil" aria-hidden="true"></i> Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#rules" data-toggle="collapse" data-target=".navbar-collapse.show"><i class="fa fa-list-ol" aria-hidden="true"></i> Rules</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#schedule" data-toggle="collapse" data-target=".navbar-collapse.show"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule</a>
+                    <a class="nav-link" href="{{ url('forum/new') }}"><i class="fa fa-plus" aria-hidden="true"></i> New Post</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/portal/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Portal</a>

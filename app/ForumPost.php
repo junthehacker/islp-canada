@@ -13,4 +13,8 @@ class ForumPost extends Model
     public function forum_posts(){
         return $this->hasMany('App\ForumPost');
     }
+
+    public function forum_channel(){
+        return $this->belongsTo('App\ForumChannel');
+    }
 }

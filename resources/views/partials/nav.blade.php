@@ -21,6 +21,9 @@
                     <a class="nav-link" href="#schedule" data-toggle="collapse" data-target=".navbar-collapse.show"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('forum') }}"><i class="fa fa-book" aria-hidden="true"></i> Forum</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('/portal/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Portal</a>
                 </li>
             </ul>
