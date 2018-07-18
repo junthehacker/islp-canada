@@ -96,8 +96,11 @@ class PortalController extends Controller
     {
         if ($request->user) {
             if ($request->user->role === 0) {
+                $competition = $request->competition ? Competition::find($request->competition): null;
                 return view('portal/submissions', [
-                    'posters' => Poster::all()
+                    'competitions' => Competition::all()->sortByDesc('created_at'),
+                    'competition' => $competition,
+                    'posters' => $competition ? $competition->posters : Poster::all()
                 ]);
             }
             return view('portal/submissions', [

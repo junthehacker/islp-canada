@@ -74,7 +74,30 @@
             @if (request()->user->role === 0)
                 <div class="col-md-12">
                     <hr>
-                    <h3>All Submissions ({{count($posters)}})</h3>
+                    @if($competition)
+                        <h3>Submissions to {{ $competition->name }} ({{count($posters)}})</h3>
+                    @else
+                        <h3>All Submissions ({{count($posters)}})</h3>
+                    @endif
+                    <hr>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <select name="competition" class="form-control">
+                                    <option value="">All</option>
+                                    @foreach($competitions as $competition)
+                                        <option @if(request()->input('competition') == $competition->id) selected @endif value="{{ $competition->id }}">{{ $competition->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-primary"><i class="fa fa-filter" aria-hidden="true"></i> Filter
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                    <hr>
                     <table class="table">
                         <thead>
                         <tr>
@@ -82,6 +105,7 @@
                             <th scope="col">Title</th>
                             <th scope="col">School</th>
                             <th scope="col">Student</th>
+                            <th scope="col">Competition</th>
                             <th scope="col">Submitted At</th>
                             <th>Actions</th>
                         </tr>
@@ -93,6 +117,7 @@
                                 <td>{{$poster->title}}</td>
                                 <td>{{$poster->user->teacher->school}}</td>
                                 <td>{{$poster->student_name}}</td>
+                                <td>{{$poster->competition->name}}</td>
                                 <td>{{ date('Y/m/d', strtotime($poster->created_at)) }}</td>
                                 <td>
                                     <a href="{{url('portal/submissions/' . $poster->id . '/image')}}" target="_blank">
