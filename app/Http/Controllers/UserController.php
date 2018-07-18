@@ -40,28 +40,33 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Create an account for teacher
+     * @param Request $request
+     * @return string
+     */
     public function createTeacherAccount(Request $request){
         if(strlen($request->input('password')) < 8){
-            return back()->with('teacher_signup_error', 'Password must be at least 8 characters long.');
+            return "Password must be at least 8 characters long.";
         }
         $user = User::where('email', $request->input('email'))->first();
         if($user){
-            return back()->with('teacher_signup_error', 'Email address is already used by another user.');
+            return "Email address is already used by another user.";
         }
         if(!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)){
-            return back()->with('teacher_signup_error', 'Please enter a valid email address.');
+            return "Please enter a valid email address.";
         }
         if(!$request->name){
-            return back()->with('teacher_signup_error', 'Name is a required field.');
+            return "Name is a required field.";
         }
         if(!$request->school){
-            return back()->with('teacher_signup_error', 'School is a required field.');
+            return "School is a required field.";
         }
         if(!$request->heard_from){
-            return back()->with('teacher_signup_error', '[How did you hear about ISLP?] is a required field.');
+            return "[How did you hear about ISLP?] is a required field.";
         }
         if(!$request->teaching_subject){
-            return back()->with('teacher_signup_error', 'Teaching subject is a required field.');
+            return "Teaching subject is a required field.";
         }
 
         $user = new User();
@@ -78,7 +83,7 @@ class UserController extends Controller
         $teacher->user_id = $user->id;
         $teacher->save();
 
-        return back()->with('teacher_signup_success', 'Registration successful, you can now login.');
+        return "ok";
 
     }
 

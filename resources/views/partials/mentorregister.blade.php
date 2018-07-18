@@ -1,5 +1,4 @@
 <form style="display: none;" id="mentor-application-form">
-    {{ csrf_field() }}
     <div class="row">
         <div class="col-md-6 pad-top">
             <label for="mentor-fullname">Full Name *</label>
@@ -38,6 +37,7 @@
     <p class="signup-terms-service col-md-6">By clicking the apply button, you agree to send the above information to ISLP poster competition organization committee. You will be notified by email once your application has been processed.</p>
 
 </form>
+<div class="alert alert-success hidden" id="mentor-application-success">Registration successful, you can now login to your account to monitor your application status.</div>
 
 <script>
     function submitMentorApplication(){
@@ -60,7 +60,9 @@
                 $("#mentor-application-error").html(result);
                 $("#mentor-application-error").slideDown();
             } else {
-                alert("Registration successful, you can now login to your account to check your application status.");
+                // TODO: Add link to login page
+                $("#mentor-application-form").slideUp();
+                $("#mentor-application-success").slideDown();
             }
             $("#submit-mentor-application-button").html(currentButtonText);
         });

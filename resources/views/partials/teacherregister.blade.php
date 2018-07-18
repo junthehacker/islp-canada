@@ -1,4 +1,4 @@
-<form action="{{ url('/portal/signup/teacher') }}" method="post">
+<form id="teacher-application-form">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-6 pad-top">
@@ -36,6 +36,44 @@
             <input type="text" name="additional_resources" class="form-control inverted" id="teacher-resources"/>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-xl rounded-pill mt-5"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Register</button>
+    <br>
+    <div class="alert alert-danger hidden" id="teacher-application-error"></div>
+    <button type="button" id="submit-teacher-application-button" class="btn btn-primary btn-xl rounded-pill mt-5" onclick="submitTeacherApplication();">
+        <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Register
+    </button>
     <p class="signup-terms-service col-md-6">By clicking the register button, you agree to send the above information to ISLP poster competition organization committee.</p>
 </form>
+<div class="alert alert-success hidden" id="mentor-application-success">Registration successful, you can now login.</div>
+
+
+<script>
+    function submitTeacherApplication(){
+        let data = {
+            name: $("#teacher-fullname").val(),
+            email: $("#teacher-email").val(),
+            teaching_subject: $("#teacher-subject").val(),
+            heard_from: $("#teacher-hear").val(),
+            school: $("#teacher-school").val(),
+            password: $("#teacher-password").val(),
+            additional_resources: $("#teacher-resources").val()
+        };
+
+        let currentButtonText = $("#submit-teacher-application-button").html();
+        $("#teacher-application-error").slideUp();
+
+        $("#submit-teacher-application-button").html("<i class=\"fa fa-circle-o-notch fa-spin\" aria-hidden=\"true\"></i>");
+
+        $.post("{{ url('api/teacher') }}", data, function(result){
+            if(result !== 'ok'){
+                $("#teacher-application-error").html(result);
+                $("#teacher-application-error").slideDown();
+            } else {
+                // TODO: Add link to login page
+                $("#teacher-application-form").slideUp();
+                $("#teacher-application-success").slideDown();
+            }
+            $("#submit-teacher-application-button").html(currentButtonText);
+        });
+
+    }
+</script>

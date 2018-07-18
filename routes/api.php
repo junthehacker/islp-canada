@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/mentor', 'UserController@createMentorAccount');
+Route::post('/teacher', 'UserController@createTeacherAccount');
