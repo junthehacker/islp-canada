@@ -47,4 +47,19 @@ class PosterController extends Controller
             return redirect('/portal/login');
         }
     }
+
+    public function getPosterImage(Request $request, $id){
+        if($request->user && $request->user->role === 0) {
+            $submission = Poster::find($id);
+            if($submission){
+                return view('portal/submissions/image', [
+                    'base64' => $submission->image_base64
+                ]);
+            } else {
+                return "not found";
+            }
+        } else {
+            return redirect('/portal/login');
+        }
+    }
 }

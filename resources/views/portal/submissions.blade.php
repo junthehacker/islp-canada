@@ -51,7 +51,10 @@
                                         <h5>{{$poster->title}}</h5>
                                         <form>
                                             {{ csrf_field() }}
-                                            <button class="btn btn-danger" @if($competition->status !== 'accept_submissions') disabled @endif>Delete</button>
+                                            <button class="btn btn-danger"
+                                                    @if($competition->status !== 'accept_submissions') disabled @endif>
+                                                Delete
+                                            </button>
                                         </form>
                                         <p>
                                             Student: {{$poster->student_name}}<br>
@@ -92,9 +95,12 @@
                                 <td>{{$poster->student_name}}</td>
                                 <td>{{ date('Y/m/d', strtotime($poster->created_at)) }}</td>
                                 <td>
-                                    <button class="btn btn-primary"
-                                            onclick="openBase64NewTab('{{$poster->image_base64}}')">View Submission
-                                    </button>
+                                    <a href="{{url('portal/submissions/' . $poster->id . '/image')}}" target="_blank">
+                                        <button class="btn btn-primary">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                            View Poster
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

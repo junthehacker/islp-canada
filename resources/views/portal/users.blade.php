@@ -32,14 +32,31 @@ $roleNames = [
                     </div>
                 @endif
                 <h1>Users</h1>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">Create User</button>
-                <br><br>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addUserModal"><i class="fa fa-plus" aria-hidden="true"></i> Create User</button>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <select class="form-control">
+                            <option>All</option>
+                            <option>Admin</option>
+                            <option>Teacher</option>
+                            <option>Judge</option>
+                            <option>Mentor</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
+                    </div>
+                </div>
+                <hr>
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">User ID</th>
                         <th scope="col">Role</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Updated At</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -49,14 +66,21 @@ $roleNames = [
                             <th scope="row">{{$user->id}}</th>
                             <td>{{$user->email}}</td>
                             <td>{{$roleNames[$user->role]}}</td>
+                            <td>{{date('M jS, Y G:i e', strtotime($user->created_at))}}</td>
+                            <td>{{date('M jS, Y G:i e', strtotime($user->updated_at))}}</td>
                             <td>
                                 <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                            data-toggle="dropdown">
                                         Actions
                                     </button>
                                     <div class="dropdown-menu">
-                                        <button class="dropdown-item"><i class="fa fa-external-link" aria-hidden="true"></i> View Detail</button>
-                                        <button class="dropdown-item"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                        <button class="dropdown-item"><i class="fa fa-external-link"
+                                                                         aria-hidden="true"></i> View Detail
+                                        </button>
+                                        <button class="dropdown-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            Delete
+                                        </button>
                                     </div>
                                 </div>
                             </td>

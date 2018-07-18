@@ -32,6 +32,8 @@ Route::get('/portal/mentorapplications', 'PortalController@mentorApplicationsPag
 Route::get('/portal/mentorapplications/detail/{id}', 'PortalController@mentorApplicationDetailsPage')->name('mentorapplications')->middleware('admin');
 Route::get('/portal/submissions', 'PortalController@submissionsPage')->name('submissions');
 
+Route::get('/portal/submissions/{id}/image', 'PosterController@getPosterImage')->name('submissions');
+
 // Rubric routes
 Route::get('/portal/rubric', 'PortalController@rubricPage')->name('rubric')->middleware('admin');
 Route::get('/portal/rubric/{id}', 'PortalController@rubricListingPage')->name('rubric')->middleware('admin');
@@ -77,6 +79,7 @@ Route::post('/portal/users/create', 'PortalController@createUser')->name('create
 Route::post('/portal/posters/create', 'PosterController@create')->name('createPoster');
 Route::post('/portal/mentors/approve', 'PortalController@approveMentor')->name('approveMentor')->middleware('admin');
 Route::post('/portal/mentors/decline', 'PortalController@declineMentor')->name('declineMentor')->middleware('admin');
+
 
 
 Route::post('/portal/login', 'UserController@authenticate');
