@@ -51,6 +51,12 @@ Route::post('/portal/forum/channels/delete', 'ForumChannelController@delete')->m
 Route::post('/portal/forum/channels/enable', 'ForumChannelController@enable')->middleware('admin');
 Route::post('/portal/forum/channels/disable', 'ForumChannelController@disable')->middleware('admin');
 
+// Content management routes
+Route::get('/portal/content', 'StringResourceController@listPage')->name('content')->middleware('admin');
+Route::get('/portal/content/create', 'StringResourceController@createPage')->name('content')->middleware('admin');
+Route::post('/portal/content/create', 'StringResourceController@create')->name('content')->middleware('admin');
+Route::get('/portal/content/delete/{id}', 'StringResourceController@deletePage')->name('content')->middleware('admin');
+Route::post('/portal/content/delete/{id}', 'StringResourceController@delete')->name('content')->middleware('admin');
 
 
 // Forum
