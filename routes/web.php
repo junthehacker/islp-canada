@@ -33,6 +33,7 @@ Route::get('/portal/mentorapplications/detail/{id}', 'PortalController@mentorApp
 Route::get('/portal/submissions', 'PortalController@submissionsPage')->name('submissions');
 
 Route::get('/portal/submissions/{id}/image', 'PosterController@getPosterImage')->name('submissions');
+Route::get('/portal/submissions/export', 'PortalController@exportSubmissions')->name('submissions');
 
 // Rubric routes
 Route::get('/portal/rubric', 'PortalController@rubricPage')->name('rubric')->middleware('admin');

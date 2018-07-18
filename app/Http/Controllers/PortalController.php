@@ -14,6 +14,7 @@ use App\JudgingResult;
 use App\JudgingRule;
 use App\Poster;
 use App\User;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -442,5 +443,63 @@ class PortalController extends Controller
         return view('portal/forum/manage', [
             'channels' => ForumChannel::all()
         ]);
+    }
+
+    /**
+     * Export submissions to CSV
+     * Takes in a parameter called competition, define which competition to export, if not found, export all
+     * @param Request $request
+     * @return mixed
+     */
+    public function exportSubmissions(Request $request){
+        $competition = $request->input('competition') ? Competition::find($request->input('competition')) : null;
+        if($competition){
+            $posters = $competition->posters;
+        } else {
+            $posters = Poster::all();
+        }
+
+        // Construct the response
+        $headers = array(
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=export.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        );
+
+        $columns = [
+            'id',
+            'title',
+            'student_name',
+            'submitted_at',
+            'teacher_email',
+            'teacher_name',
+            'teacher_id',
+            'school',
+            'link'
+        ];
+
+        $callback = function() use ($posters, $columns)
+        {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach($posters as $poster) {
+                fputcsv($file, [
+                    $poster->id,
+                    $poster->title,
+                    $poster->student_name,
+                    $poster->created_at,
+                    $poster->user->email,
+                    $poster->user->teacher->name,
+                    $poster->user->id,
+                    $poster->user->teacher->school,
+                    url('portal/submissions/' . $poster->id . '/image')
+                ]);
+            }
+            fclose($file);
+        };
+        return Response::stream($callback, 200, $headers);
     }
 }

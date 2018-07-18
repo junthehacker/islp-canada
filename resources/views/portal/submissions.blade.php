@@ -73,6 +73,11 @@
             @endif
             @if (request()->user->role === 0)
                 <div class="col-md-12">
+                    <a href="{{url('portal/submissions/export?competition=' . ($competition ? $competition->id : ""))}}">
+                        <button class="btn btn-primary"><i class="fa fa-table" aria-hidden="true"></i>
+                            Export to CSV
+                        </button>
+                    </a>
                     <hr>
                     @if($competition)
                         <h3>Submissions to {{ $competition->name }} ({{count($posters)}})</h3>
@@ -86,7 +91,8 @@
                                 <select name="competition" class="form-control">
                                     <option value="">All</option>
                                     @foreach($competitions as $competition)
-                                        <option @if(request()->input('competition') == $competition->id) selected @endif value="{{ $competition->id }}">{{ $competition->name }}</option>
+                                        <option @if(request()->input('competition') == $competition->id) selected
+                                                @endif value="{{ $competition->id }}">{{ $competition->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
