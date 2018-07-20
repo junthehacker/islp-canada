@@ -1,3 +1,7 @@
+@php
+    use App\StringResource;
+@endphp
+
 @extends('layouts/landing')
 
 @section('content')
@@ -30,10 +34,11 @@
                         {{ session('mentor_signup_success') }}
                     </div>
                 @endif
-                <h1 class="masthead-heading mb-0">ISLP</h1>
-                <h2 class="masthead-subheading mb-0">Canadian National Statistics Poster Competiton</h2>
-                <h3>Create, Share, Compete</h3>
-                <a href="#register" class="btn btn-primary btn-xl rounded-pill mt-5">How to Participate</a>
+                <h1 class="masthead-heading mb-0">{{ StringResource::get('landing_title_1') }}</h1>
+                <h2 class="masthead-subheading mb-0">{{ StringResource::get('landing_title_2') }}</h2>
+                <h3>{{ StringResource::get('landing_title_3') }}</h3>
+                <a href="#register"
+                   class="btn btn-primary btn-xl rounded-pill mt-5">{{ StringResource::get('landing_how_to_participate_button') }}</a>
             </div>
         </div>
     </header>
@@ -49,11 +54,12 @@
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4"><img src="{{ asset('images/question.jpg') }}" height="100" /> What is ISLP Poster
-                            Competition</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
-                            sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                            voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4"><img src="{{ asset('images/question.jpg') }}" height="100"/>
+                            {{ StringResource::get('landing_feature_1_title') }}
+                        </h2>
+                        <p>
+                            {!! StringResource::get('landing_feature_1_content') !!}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -70,11 +76,12 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="p-5">
-                        <h2 class="display-4"><img src="{{ asset('images/drawing.jpg') }}" height="100" /> Create, Share, Compete
+                        <h2 class="display-4"><img src="{{ asset('images/drawing.jpg') }}" height="100"/>
+                            {{ StringResource::get('landing_feature_2_title') }}
                         </h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam
-                            sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                            voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <p>
+                            {!! StringResource::get('landing_feature_2_content') !!}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -88,29 +95,34 @@
                     <div class="p-5">
                         <div class="pill-header">
                             <div class="pill-header-inner">
-                                <button class="left active" id="student-button" onClick="switchToStudent();">Student</button><button class="right" id="teacher-button" onClick="switchToTeacher();">Teacher</button>
+                                <button class="left active" id="student-button" onClick="switchToStudent();">Student
+                                </button><button class="right" id="teacher-button" onClick="switchToTeacher();">Teacher</button>
                             </div>
                         </div>
                         <div id="student-section">
-                            <h2 class="display-4"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Student?
-                                Participate Today!</h2>
-                            <p>Ask your teacher about ISLP national poster competition and participate today! There are
-                                many prizes to be won. The competition is completely free, and you will have a chance to enter ISLP international poster competition!</p>
-                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5" onclick="openPhotoSwipe()"><i class="fa fa-picture-o" aria-hidden="true"></i> Sample Posters</a>
+                            <h2 class="display-4">
+                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                {{ StringResource::get('landing_student_title') }}
+                            </h2>
+                            {!! StringResource::get('landing_student_content') !!}
+                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5" onclick="openPhotoSwipe()">
+                                <i class="fa fa-picture-o"
+                                   aria-hidden="true"></i> {{ StringResource::get('landing_sample_posters') }}</a>
                             <br><br><br><br>
-                            <h3>Undergraduate? Interested in becoming a mentor?</h3>
-                            <p>Apply to become a volunteering mentor for ISLP today! Strengthen your statistical skills, and have fun!</p>
-                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5" id="show-mentor-application-button" onclick="showMentorApplication()"><i class="fa fa-pencil" aria-hidden="true"></i> Mentor Application</a>
+                            <h3>{{ StringResource::get('landing_undergraduate_title') }}</h3>
+                            {!! StringResource::get('landing_undergraduate_content') !!}
+                            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5"
+                               id="show-mentor-application-button" onclick="showMentorApplication()">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                {{ StringResource::get('landing_mentor_application') }}
+                            </a>
                             @include('partials/mentorregister')
                         </div>
                         <div class="hidden" id="teacher-section">
-                            <h2 class="display-4"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Register Your Class</h2>
-                            <p>
-                                Register your class today for ISLP national statistics competition! An account allows
-                                you to submit posters, manage submissions, and ask questions on the forum.<br>
-                                All information collected is for the competition only, we never share your information
-                                with anyone else.
-                            </p>
+                            <h2 class="display-4"><i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                {{ StringResource::get('landing_teacher_title') }}
+                            </h2>
+                            {!! StringResource::get('landing_teacher_content') !!}
                             @include('partials/teacherregister')
                         </div>
                     </div>
@@ -124,57 +136,27 @@
             <div class="row align-items-center">
                 <div class="col-lg-12 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4"><i class="fa fa-list-ol" aria-hidden="true"></i> Rules</h2>
+                        <h2 class="display-4"><i class="fa fa-list-ol"
+                                                 aria-hidden="true"></i> {{ StringResource::get('landing_rules_title') }}
+                        </h2>
                         <div class="row">
                             <div class="col-md-6">
-                                <h3>Who can take part?</h3>
-                                <ul>
-                                    <li>Teams of 2−5 students <b>(we do not allow posters made by only one student)</b></li>
-                                    <li>Three divisions:</li>
-                                    <ul>
-                                        <li>Students born in 2002 and younger (lower secondary or upper comprehensive school)</li>
-                                        <li>Students born in 1999 and younger (upper secondary school)</li>
-                                        <li>Undergraduate students in university/college (Bachelor’s degree students or equivalent, no age limit)</li>
-                                    </ul>
-                                </ul>
-                                <h3>How can I participate?</h3>
-                                <ul>
-                                    <li>Posters must be submitted by teachers <i data-toggle="tooltip" class="fa fa-question-circle-o tooltip-question" data-placement="top" title="Are you a teacher? Register your class above by selecting [Teacher]"></i> to country coordinators for entry in National Competition</li>
-                                    <li>Teachers can submit posters using <a href="{{url('portal/login')}}">Canadian ISLP Poster Competition Portal</a>.</li>
-                                </ul>
-                                <h3>How much does it cost?</h3>
-                                <ul>
-                                    <li>It is completely FREE!</li>
-                                </ul>
+                                <h3>{{ StringResource::get('landing_rules_who_can_take_part_title') }}</h3>
+                                {!! StringResource::get('landing_rules_who_can_take_part_content') !!}
+                                <h3>{{ StringResource::get('landing_rules_how_can_i_participate_title') }}</h3>
+                                {!! StringResource::get('landing_rules_how_can_i_participate_content') !!}
+                                <h3>{{ StringResource::get('landing_rules_how_must_does_it_cost_title') }}</h3>
+                                {!! StringResource::get('landing_rules_how_must_does_it_cost_content') !!}
                             </div>
                             <div class="col-md-6">
-                                <h3>Poster content</h3>
-                                <ul>
-                                    <li>There is <b>no particular theme or topic required</b> for a poster to be eligible. However, posters should
-                                        reflect or illustrate usage, analysis, interpretation and communication of statistics or statistical
-                                        information and findings.</li>
-                                    <li>Data used can be collected by students or previously published by someone else (if the data is
-                                        published, the source must be cited in the poster)</li>
-                                    <li>Posters can be in <b>any language</b></li>
-                                    <li>Posters <b>must be blind</b> i.e. they must not contain any information about students or schools who have
-                                        submitted them <i data-toggle="tooltip" class="fa fa-question-circle-o tooltip-question" data-placement="top" title="Our judging system does not show personal information to judges."></i></li>
-                                    <li>Posters from previous international competitions are not allowed</li>
-                                    <li>Posters must be the original design and creation of students</li>
-                                    <li>Posters must be two-dimensional (one single sheet) and one-sided: maximum size is A1 (841 mm x 594
-                                        mm or 33.1 in x 23.4 in) and maximum file size is 10 MB. In case of an electronic poster, the font size
-                                        should be such that if it was printed in A1, it would be readable from 2 metres (7 feet) away.</li>
-                                </ul>
+                                <h3>{{ StringResource::get('landing_rules_poster_content_title') }}</h3>
+                                {!! StringResource::get('landing_rules_poster_content_content') !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h3>Other</h3>
-                                <ul>
-                                    <li>Posters received after the established deadline will not be considered for the competition.</li>
-                                    <li>By submitting a poster, students give permission for their work to be displayed at various ISI
-                                        conferences, special events, in publications and promotional material, and in electronic format on the
-                                        internet.</li>
-                                </ul>
+                                <h3>{{ StringResource::get('landing_rules_other_title') }}</h3>
+                                {!! StringResource::get('landing_rules_other_content') !!}
                             </div>
                         </div>
                     </div>
@@ -188,11 +170,11 @@
             <div class="row align-items-center">
                 <div class="col-lg-12 order-lg-1">
                     <div class="p-5">
-                        <h2 class="display-4"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule</h2>
-                        <p>
-                            Deadline to submit posters - February 29th, 2019<br>
-                            National winners announced - March 29th, 2019
-                        </p>
+                        <h2 class="display-4">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            {{ StringResource::get('landing_schedule_title') }}
+                        </h2>
+                        {!! StringResource::get('landing_schedule_content') !!}
                     </div>
                 </div>
             </div>
@@ -254,14 +236,14 @@
             $("#primary-nav").removeClass("filled");
         }
 
-        function switchToStudent(){
+        function switchToStudent() {
             $("#student-button").addClass("active");
             $("#teacher-button").removeClass("active");
             $("#student-section").removeClass("hidden");
             $("#teacher-section").addClass("hidden");
         }
 
-        function switchToTeacher(){
+        function switchToTeacher() {
             $("#teacher-button").addClass("active");
             $("#student-button").removeClass("active");
             $("#teacher-section").removeClass("hidden");
@@ -364,15 +346,15 @@
 
         });
 
-        function showMentorApplication(){
+        function showMentorApplication() {
             $("#mentor-application-form").slideDown();
             $('#show-mentor-application-button')
                 .stop(true, true)
                 .animate({
-                    height:"toggle",
+                    height: "toggle",
                     padding: "toggle",
                     margin: "toggle",
-                    opacity:"toggle"
+                    opacity: "toggle"
                 }, 500)
         }
 

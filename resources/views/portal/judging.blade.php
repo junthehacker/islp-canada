@@ -44,16 +44,22 @@
             </div>
             <hr>
             <h2>Automatic Assignment</h2>
-            <label>How many judges should look over one poster?</label>
-            <form action="{{url('portal/judging/autoassign')}}" method="post">
-                {{ csrf_field() }}
-                <input type="number" name="count" class="form-control" value="3"/>
-                <br>
-                <div class="alert alert-light">By automatically assigning, you will lose all previously scored
-                    results.
+            @if($competition->status === 'submission_closed')
+                <label>How many judges should look over one poster?</label>
+                <form action="{{url('portal/judging/autoassign')}}" method="post">
+                    {{ csrf_field() }}
+                    <input type="number" name="count" class="form-control" value="3"/>
+                    <br>
+                    <div class="alert alert-light">By automatically assigning, you will lose all previously scored
+                        results.
+                    </div>
+                    <button class="btn btn-primary">Assign Judges</button>
+                </form>
+            @else
+                <div class="alert alert-danger">
+                    Please set competition status to [Submission Closed] before assigning judges.
                 </div>
-                <button class="btn btn-primary">Assign Judges</button>
-            </form>
+            @endif
             <hr>
             <h2>Assignments</h2>
             <div class="alert alert-light">This information should never be shared with judges while judging is not
@@ -66,6 +72,7 @@
                     <th>School</th>
                     <th>Assigned Judges</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -82,12 +89,26 @@
                             @foreach($poster->judging_results as $result)
                                 @if($result->result)
                                     <span class="badge badge-success">Scored</span>
-                                    <span class="badge badge-success">{{ $result->result['final_percentage'] * 100 }} %</span>
+                                    <span class="badge badge-success">{{ $result->result['final_percentage'] * 100 }}
+                                        %</span>
                                 @else
                                     <span class="badge badge-warning">Pending</span>
                                 @endif
                                 <br>
                             @endforeach
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                        data-toggle="dropdown">
+                                    Actions
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item">
+                                        <i class="fa fa-external-link" aria-hidden="true"></i> View Detail
+                                    </button>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

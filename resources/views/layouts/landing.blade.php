@@ -1,3 +1,6 @@
+@php
+use App\StringResource;
+@endphp
 <!doctype html>
 <html>
     <head>

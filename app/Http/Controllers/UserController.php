@@ -127,4 +127,37 @@ class UserController extends Controller
 
         return "ok";
     }
+
+    /**
+     * Get confirm user deletion page
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function deletePage(Request $request, $id){
+        $user = User::find($id);
+        if ($user) {
+            return view('portal/user/delete', [
+                'user' => $user
+            ]);
+        } else {
+            return App::abort(404);
+        }
+    }
+
+    /**
+     * Execute a deletion request
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request, $id){
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+            return redirect('portal/users')->with('success', "User deleted.");
+        } else {
+            return App::abort(404);
+        }
+    }
 }

@@ -27,7 +27,6 @@ Route::get('/portal/login', 'UserController@loginPage')->name('login');
 Route::get('/portal/dashboard', 'PortalController@dashboardPage')->name('dashboard');
 Route::get('/portal/account', 'PortalController@accountPage')->name('account');
 
-Route::get('/portal/users', 'PortalController@usersPage')->name('users')->middleware('admin');
 Route::get('/portal/mentorapplications', 'PortalController@mentorApplicationsPage')->name('mentorapplications')->middleware('admin');
 Route::get('/portal/mentorapplications/detail/{id}', 'PortalController@mentorApplicationDetailsPage')->name('mentorapplications')->middleware('admin');
 Route::get('/portal/submissions', 'PortalController@submissionsPage')->name('submissions');
@@ -51,12 +50,20 @@ Route::post('/portal/forum/channels/delete', 'ForumChannelController@delete')->m
 Route::post('/portal/forum/channels/enable', 'ForumChannelController@enable')->middleware('admin');
 Route::post('/portal/forum/channels/disable', 'ForumChannelController@disable')->middleware('admin');
 
+// User routes
+Route::get('/portal/users', 'PortalController@usersPage')->name('users')->middleware('admin');
+Route::get('/portal/users/delete/{id}', 'UserController@deletePage')->name('users')->middleware('admin');
+Route::post('/portal/users/delete/{id}', 'UserController@delete')->name('users')->middleware('admin');
+
+
 // Content management routes
 Route::get('/portal/content', 'StringResourceController@listPage')->name('content')->middleware('admin');
 Route::get('/portal/content/create', 'StringResourceController@createPage')->name('content')->middleware('admin');
 Route::post('/portal/content/create', 'StringResourceController@create')->name('content')->middleware('admin');
 Route::get('/portal/content/delete/{id}', 'StringResourceController@deletePage')->name('content')->middleware('admin');
 Route::post('/portal/content/delete/{id}', 'StringResourceController@delete')->name('content')->middleware('admin');
+Route::get('/portal/content/edit/{id}', 'StringResourceController@editPage')->name('content')->middleware('admin');
+Route::post('/portal/content/edit/{id}', 'StringResourceController@update')->name('content')->middleware('admin');
 
 
 // Forum

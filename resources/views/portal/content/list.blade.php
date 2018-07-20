@@ -42,15 +42,16 @@
                                 Actions
                             </button>
                             <div class="dropdown-menu">
-                                <button class="dropdown-item">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
-                                </button>
+                                <a href="{{ url('portal/content/edit/' . $string_resource->id) }}">
+                                    <button class="dropdown-item">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                                    </button>
+                                </a>
                                 <a href="{{ url('portal/content/delete/' . $string_resource->id) }}">
                                     <button class="dropdown-item">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
                                     </button>
                                 </a>
-
                             </div>
                         </div>
                     </td>

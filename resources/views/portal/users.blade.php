@@ -7,12 +7,12 @@ $roleNames = [
 ]
 ?>
 
-@extends('layouts/portal')
+@extends('layouts.portal')
 
 @section('title') Users @endsection
 
 @section('content')
-    @include('portal/partials/nav')
+    @include('portal.partials.nav')
     <div class="container-fluid main-container">
         <div class="row">
             <div class="col-md-12">
@@ -31,8 +31,12 @@ $roleNames = [
                         {{ session('message') }}
                     </div>
                 @endif
+                @include('portal.partials.commonstatus')
                 <h1>Users</h1>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addUserModal"><i class="fa fa-plus" aria-hidden="true"></i> Create User</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addUserModal"><i class="fa fa-plus"
+                                                                                                   aria-hidden="true"></i>
+                    Create User
+                </button>
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
@@ -78,9 +82,12 @@ $roleNames = [
                                         <button class="dropdown-item"><i class="fa fa-external-link"
                                                                          aria-hidden="true"></i> View Detail
                                         </button>
-                                        <button class="dropdown-item"><i class="fa fa-trash-o" aria-hidden="true"></i>
-                                            Delete
-                                        </button>
+                                        <a href="{{ url('portal/users/delete/' . $user->id) }}">
+                                            <button class="dropdown-item">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                Delete
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                             </td>
