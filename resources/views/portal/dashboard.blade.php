@@ -53,7 +53,6 @@ $roleNames = [
                 <div class="col-md-4">
                     <hr>
                     <h2><i class="fa fa-balance-scale" aria-hidden="true"></i> Judging</h2>
-                    <p>Judging is currently disabled.</p>
                     <a href="{{ url('/portal/rubric') }}">
                         <button class="btn btn-primary">Manage Rubric</button>
                     </a>

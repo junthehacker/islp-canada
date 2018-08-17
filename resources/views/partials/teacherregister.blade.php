@@ -43,7 +43,10 @@
     </button>
     <p class="signup-terms-service col-md-6">By clicking the register button, you agree to send the above information to ISLP poster competition organization committee.</p>
 </form>
-<div class="alert alert-success hidden" id="mentor-application-success">Registration successful, you can now login.</div>
+<div class="alert alert-success hidden" id="teacher-application-success">
+    Registration successful, click <a href="{{ url('/portal/login') }}">here to login to your new account</a>.<br/>
+    Or you can login later by clicking on the [Portal] link in navigation.
+</div>
 
 
 <script>

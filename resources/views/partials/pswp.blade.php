@@ -71,14 +71,16 @@
 
         let items = [
             {
-                src: 'https://placekitten.com/600/400',
-                w: 600,
-                h: 400
+                src: '{{ asset('images/2_Australia_Poster.jpg') }}',
+                w: 1920,
+                h: 1506,
+                title: "Older Age, Decline in Rainfall, Baldivis Secondary College, Bernise Roelofse, Berdine Roelofse, Australia, 1st Place 2016-2017 International"
             },
             {
-                src: 'https://placekitten.com/1200/900',
-                w: 1200,
-                h: 900
+                src: '{{ asset('images/1_South-Korea_Poster.jpg') }}',
+                w: 1920,
+                h: 1401,
+                title: "Younger Age, Seoul Dongho Elementary School, Jo Yuna, Lee Yena, South Korea, 1st Place 2016-2017"
             }
         ];
 

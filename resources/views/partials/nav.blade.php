@@ -26,6 +26,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('forum') }}"><i class="fa fa-book" aria-hidden="true"></i> {{ StringResource::get('nav_forum') }}</a>
                 </li>
+                @if(request()->get('lang') !== 'fr')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('?lang=fr') }}">Français</a>
+                </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('?lang=') }}">English</a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/portal/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{ StringResource::get('nav_portal') }}</a>
                 </li>
