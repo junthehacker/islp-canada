@@ -4,6 +4,21 @@
     padding-right: 40px;
 }
 
+.alert {
+    border: none;
+    box-shadow: rgba(0,0,0,0.05) 5px 5px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ex-small-text {
+    font-size: 16px;
+}
+
+.alert.alert-dark {
+    background-color: #dddddd;
+}
+
 .breadcrumb {
     background-color: transparent;
     border: none;

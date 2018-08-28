@@ -24,50 +24,59 @@
                     </ol>
                 </nav>
                 <h1>Submissions</h1>
-                @if (request()->user->role === 1)
-                    @if($current_competition && $current_competition->status === 'accept_submissions')
+                @if (request()->user->isTeacher())
+                    @if($current_competition && $current_competition->acceptSubmissions())
                         <button class="btn btn-primary" data-toggle="modal" data-target="#addPosterModal"><i
                                     class="fa fa-plus"
                                     aria-hidden="true"></i>
                             Submit New Poster to {{ $current_competition->name }}
                         </button>
+                        <br><br>
                     @else
-                        <p>There is no competition that accepts new submissions.</p>
+                        <p>There is no competition that currently accepts new submissions.</p>
                     @endif
                 @endif
             </div>
-            @if (request()->user->role === 1)
+            @if (request()->user->isTeacher())
                 <div class="col-md-12">
+                    <h2>My Submissions ({{count(request()->user->posters)}})</h2>
                     <hr>
-                    <h3>My Submissions ({{count(request()->user->posters)}})</h3>
                     @foreach($competitions as $competition)
-                        <hr>
-                        <h4>{{ $competition->name }} <span
-                                    class="badge badge-secondary">{{ $competition->status }}</span></h4>
+                        <h3>{{ $competition->name }} &nbsp;<span
+                                    class="text-muted ex-small-text">{{ $competition->getStatusName() }}</span></h3>
+                        @if(!$competition->acceptSubmissions())
+                            <div class="alert alert-dark">Submissions for this competition has been disabled. You cannot perform actions on submissions.</div>
+                        @endif
                         <div class="row">
                             @foreach(request()->user->posters as $poster)
                                 @if($poster->competition_id === $competition->id)
-                                    <div class="col-lg-3 col-md-6" style="overflow-y: hidden;">
-                                        <h5>{{$poster->title}}</h5>
-                                        <form>
-                                            {{ csrf_field() }}
-                                            <button class="btn btn-danger"
-                                                    @if($competition->status !== 'accept_submissions') disabled @endif>
-                                                Delete
-                                            </button>
-                                        </form>
-                                        <p>
-                                            Student: {{$poster->student_name}}<br>
-                                            Submitted on: {{ date('Y/m/d', strtotime($poster->created_at)) }}
-                                        </p>
-                                        <a href="#" onclick="openBase64NewTab('{{$poster->image_base64}}')"><img
-                                                    src="{{$poster->image_base64}}"
-                                                    style="max-height: 200px; max-width: 100%;"/></a>
-                                        <hr>
+                                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                                        <div class="card w-100">
+                                            <div class="card-body">
+                                                <h4>{{$poster->title}}</h4>
+                                                <p>
+                                                    <b>Student</b>: {{$poster->student_name}}<br>
+                                                    <b>Submitted on</b>: {{ date('Y/m/d', strtotime($poster->created_at)) }}
+                                                </p>
+                                                <a href="#" onclick="openBase64NewTab('{{$poster->image_base64}}')"><img
+                                                            src="{{$poster->image_base64}}"
+                                                            style="max-height: 200px; max-width: 100%;"/></a>
+                                            </div>
+                                            <div class="card-footer">
+                                                <form>
+                                                    {{ csrf_field() }}
+                                                    <button class="btn btn-primary"
+                                                            @if($competition->status !== 'accept_submissions') disabled @endif>
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 @endif
                             @endforeach
                         </div>
+                        <br><br>
                     @endforeach
                 </div>
             @endif

@@ -47,6 +47,9 @@ class Competition extends Model
             case "over":
                 return "Over";
                 break;
+            case "archived":
+                return "Archived";
+                break;
             default:
                 return "Unknown";
                 break;
@@ -247,5 +250,14 @@ class Competition extends Model
         } else if($this->status === 'over') {
             return 100;
         }
+        return 0;
+    }
+
+    /**
+     * Return if this competition can accept submissions
+     * @return bool
+     */
+    public function acceptSubmissions(){
+        return $this->status === 'accept_submissions';
     }
 }

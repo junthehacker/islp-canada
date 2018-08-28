@@ -69,4 +69,12 @@ class User extends Model
         ];
         return $roleNames[$this->role];
     }
+
+    /**
+     * Return if this is a teacher account
+     * @return bool
+     */
+    public function isTeacher(){
+        return $this->role === 1;
+    }
 }
