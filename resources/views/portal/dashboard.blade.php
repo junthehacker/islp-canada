@@ -1,18 +1,9 @@
-<?php
-$roleNames = [
-    0 => 'Admin',
-    1 => 'Teacher',
-    2 => 'Judge',
-    3 => 'Mentor'
-]
-?>
-
 @extends('layouts/portal')
 
 @section('title') Dashboard @endsection
 
 @section('content')
-    @include('portal/partials/nav')
+    @include('portal.partials.nav')
     <div class="container-fluid main-container">
         <div class="row">
             <div class="col-md-12">
@@ -22,50 +13,120 @@ $roleNames = [
                     </ol>
                 </nav>
                 <h1>Dashboard</h1>
-                <h3>Your are logged in as {{ $roleNames[request()->user->role] }}</h3>
+                <h3>Your are logged in as {{ request()->user->getRoleName() }}.</h3>
             </div>
             @if(request()->user->role === 0)
-                <div class="col-md-4">
-                    <hr>
-                    <h2><i class="fa fa-users" aria-hidden="true"></i> Users</h2>
-                    <div class="large-dashboard-num">{{ count($users)  }}</div>
-                    <a href="{{ url('/portal/users') }}">
-                        <button class="btn btn-primary">Manage Users</button>
-                    </a>
+                <div class="col-md-12 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Current Competition - {{ $competition ? $competition->name : "No competition active." }} ({{$competition->getStatusName()}})</h3>
+                            <h4>Task Checklist</h4>
+                            @include('portal.partials.competitionchecklist')
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url('/portal/competitions') }}">
+                                <button class="btn btn-primary">Manage Competitions</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <hr>
-                    <h2><i class="fa fa-file-text" aria-hidden="true"></i> Submissions</h2>
-                    <p>All submissions, including archived competitions.</p>
-                    <div class="large-dashboard-num">{{ count($posters) }}</div>
-                    <a href="{{ url('/portal/submissions') }}">
-                        <button class="btn btn-primary">Manage Submissions</button>
-                    </a>
+                <div class="col-md-3 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Users</h3>
+                            Number of active users currently within the system.
+                            <div class="large-dashboard-num">{{ count($users)  }}</div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url('/portal/users') }}">
+                                <button class="btn btn-primary">Manage Users</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <hr>
-                    <h2><i class="fa fa-pencil" aria-hidden="true"></i> Pending Mentors</h2>
-                    <div class="large-dashboard-num">{{ $pending_mentor_app_count }}</div>
-                    <a href="{{ url('/portal/mentorapplications') }}">
-                        <button class="btn btn-primary">Review</button>
-                    </a>
+                <div class="col-md-3 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Submissions</h3>
+                            All submissions in the system, including all competitions.
+                            <div class="large-dashboard-num">{{ count($posters) }}</div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url('/portal/submissions') }}">
+                                <button class="btn btn-primary">Manage Submissions</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <hr>
-                    <h2><i class="fa fa-balance-scale" aria-hidden="true"></i> Judging</h2>
-                    <a href="{{ url('/portal/rubric') }}">
-                        <button class="btn btn-primary">Manage Rubric</button>
-                    </a>
+                <div class="col-md-3 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Pending Mentors</h3>
+                            Number of pending mentor applications.
+                            <div class="large-dashboard-num">{{ $pending_mentor_app_count }}</div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url('/portal/mentorapplications') }}">
+                                <button class="btn btn-primary">Review</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Judging</h3>
+                            @if($competition->status !== 'begin_judging')
+                                <p>Judging is currently disabled. Enable judging by changing the competition status to Begin Judging.</p>
+                            @else
+                                <p>Judging is currently enabled. Judges can now login to their accounts.</p>
+                            @endif
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url('/portal/rubric') }}">
+                                <button class="btn btn-primary">Manage Rubric</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             @endif
             @if(request()->user->role === 1)
-                <div class="col-md-6">
-                    <hr>
-                    <h2><i class="fa fa-file-text" aria-hidden="true"></i> My Submissions</h2>
-                    <div class="large-dashboard-num">{{ count(request()->user->posters) }}</div>
-                    <a href="{{ url('/portal/submissions') }}">
-                        <button class="btn btn-primary">Manage Submissions</button>
-                    </a>
+                <div class="col-md-6 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Current Competition - {{ $competition ? $competition->name : "No competition active." }}</h3>
+                            @if($competition->status === 'accept_submissions')
+                                <p>
+                                    <b>This competition is currently accepting submissions</b>, submit a new poster in Submissions tab.<br><br>
+                                    Please make sure you read the <a href="https://islp.ssc.ca/#rules">competition rules</a> before making any submissions.
+                                </p>
+                            @else
+                                <p>
+                                    This competition is not currently accepting submissions.
+                                </p>
+                            @endif
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url('portal/submissions') }}">
+                                <button class="btn btn-primary" @if($competition->status !== 'accept_submissions') disabled @endif>Submit New Entry</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Forum</h3>
+                            <p>
+                                As a teacher, you have access to our forum, if you have any questions, please post on the forum, and we will try our best to answer.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url('forum') }}">
+                                <button class="btn btn-primary">Visit Forum</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             @endif
             @if(request()->user->role === 2)

@@ -1,7 +1,6 @@
 <?php
 /**
  * Copyright (c) 2018. Jun Zheng All Rights Reserved
- * I hereby grant the usage of this software to SOC (Statistical Society of Canada).
  *
  * Issue with the software? Contact juncapersonal at gmail dot com.
  */
@@ -290,7 +289,7 @@ class PortalController extends Controller
      */
     public function competitionsPage(Request $request)
     {
-        return view('portal/competitions', [
+        return view('portal/competitions/home', [
             'competitions' => Competition::all()->sortByDesc('created_at'),
             'current_competition' => $this->_getCurrentCompetition()
         ]);

@@ -55,4 +55,18 @@ class User extends Model
     public function judging_results(){
         return $this->hasMany('App\JudgingResult');
     }
+
+    /**
+     * Get human readable role names
+     * @return mixed
+     */
+    public function getRoleName(){
+        $roleNames = [
+            0 => 'administrator',
+            1 => 'teacher',
+            2 => 'judge',
+            3 => 'mentor'
+        ];
+        return $roleNames[$this->role];
+    }
 }
