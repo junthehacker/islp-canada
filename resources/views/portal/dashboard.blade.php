@@ -128,6 +128,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h3 class="card-title">FAQs</h3>
+                            <p>
+                               Have a question? Chances are, you will find the answer below.
+                            </p>
+                            @include('portal.partials.teacherfaqs')
+                        </div>
+                    </div>
+                </div>
             @endif
             @if(request()->user->role === 2)
                 <div class="col-md-6">

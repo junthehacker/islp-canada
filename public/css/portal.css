@@ -40,6 +40,10 @@ h1 {
     box-shadow: rgba(0,0,0,0.1) 3px 3px 10px;
 }
 
+.btn.btn-link {
+    box-shadow: none;
+}
+
 .login-form {
     margin-top: 50px;
 }
@@ -137,4 +141,13 @@ h1 {
     width: 18px;
     top: -6.5px;
     transition: all ease 0.2s;
+}
+
+.faq-container .card .card-header {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.faq-container .card .card-header h4 button {
+    padding-left: 0;
 }
