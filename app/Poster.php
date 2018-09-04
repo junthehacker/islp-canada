@@ -1,9 +1,6 @@
 <?php
 /**
- * Copyright (c) 2018. Jun Zheng All Rights Reserved
- * I hereby grant the usage of this software to SOC (Statistical Society of Canada).
- *
- * Issue with the software? Contact juncapersonal at gmail dot com.
+ * Author: Jun Zheng (me@jackzh.com)
  */
 
 namespace App;
@@ -41,5 +38,23 @@ class Poster extends Model
     public function judging_results()
     {
         return $this->hasMany('App\JudgingResult');
+    }
+
+    /**
+     * Get human readable group name
+     * @return string
+     */
+    public function getGroupName()
+    {
+        switch($this->group) {
+            case "lower_secondary":
+                return "Lower Secondary";
+            case "upper_secondary":
+                return "Upper Secondary";
+            case "undergraduate":
+                return "Undergraduate";
+            default:
+                return "Unknown";
+        }
     }
 }

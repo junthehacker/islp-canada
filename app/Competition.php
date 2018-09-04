@@ -17,7 +17,7 @@ class Competition extends Model
     }
 
     public function posters(){
-        return $this->hasMany('App\Poster');
+        return $this->hasMany('App\Poster')->orderByDesc('created_at');
     }
 
     /**

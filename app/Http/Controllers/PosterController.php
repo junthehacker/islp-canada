@@ -1,4 +1,7 @@
 <?php
+/**
+ * Author: Jun Zheng (me@jackzh.com)
+ */
 
 namespace App\Http\Controllers;
 
@@ -20,6 +23,11 @@ class PosterController extends Controller
         return null;
     }
 
+    /**
+     * Create a new poster submission
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function create(Request $request){
         if($request->user && $request->user->role === 1){
             if(!$request->input('title')){
@@ -27,6 +35,14 @@ class PosterController extends Controller
             }
             if(!$request->input('student_name')){
                 return back()->with('create_poster_error', "Student name is a required field.");
+            }
+            if(!$request->input('group')){
+                return back()->with('create_poster_error', "You must specify a group.");
+            }
+            if($request->input('group') !== 'lower_secondary' &&
+               $request->input('group') !== 'upper_secondary' &&
+               $request->input('group') !== 'undergraduate') {
+                return back()->with('create_poster_error', "You must specify a valid group.");
             }
             if(!$request->input('image_base64')){
                 return back()->with('create_poster_error', "You must upload an image.");
@@ -39,6 +55,7 @@ class PosterController extends Controller
             $poster->title = $request->input('title');
             $poster->student_name = $request->input('student_name');
             $poster->image_base64 = $request->input('image_base64');
+            $poster->group = $request->input('group');
             $poster->user_id = $request->user->id;
             $poster->competition_id = $competition->id;
             $poster->save();

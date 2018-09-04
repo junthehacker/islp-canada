@@ -12,7 +12,7 @@
             </div>
         @endif
         @if (session('create_poster_success'))
-            <div class="alert alert-primary">
+            <div class="alert alert-success">
                 {{ session('create_poster_success') }}
             </div>
         @endif
@@ -52,6 +52,9 @@
                                 @if($poster->competition_id === $competition->id)
                                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                                         <div class="card w-100">
+                                            <div class="card-header">
+                                                <b>{{ $poster->getGroupName() }}</b>
+                                            </div>
                                             <div class="card-body">
                                                 <h4>{{$poster->title}}</h4>
                                                 <p>

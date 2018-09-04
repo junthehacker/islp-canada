@@ -1,9 +1,6 @@
 <?php
 /**
- * Copyright (c) 2018. Jun Zheng All Rights Reserved
- * I hereby grant the usage of this software to SOC (Statistical Society of Canada).
- *
- * Issue with the software? Contact juncapersonal at gmail dot com.
+ * Author: Jun Zheng (me@jackzh.com)
  */
 
 namespace App;
@@ -45,7 +42,7 @@ class User extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function posters(){
-        return $this->hasMany('App\Poster');
+        return $this->hasMany('App\Poster')->orderByDesc('created_at');
     }
 
     /**

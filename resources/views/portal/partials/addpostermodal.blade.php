@@ -1,5 +1,5 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="addPosterModal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Submit New Poster</h5>
@@ -17,6 +17,14 @@
                     <div class="form-group">
                         <label>Student Name</label>
                         <input type="text" name="student_name" placeholder="Student Name" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Group</label>
+                        <select type="text" name="group" placeholder="Group" class="form-control">
+                            <option value="lower_secondary">Lower Secondary (15 years old or younger)</option>
+                            <option value="upper_secondary">Upper Secondary (18 years old or younger)</option>
+                            <option value="undergraduate">Undergraduate (Students currently pursuing Bachelor's degree)</option>
+                        </select>
                     </div>
                     <input type="hidden" id="submission_image_input" name="image_base64" value="" />
                     <label>Image File (< 4GB)</label><br>
