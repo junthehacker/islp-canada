@@ -20,6 +20,7 @@
                         </button>
                     </div>
                 @endif
+                @include('portal.partials.commonsuccess')
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page"><a href="{{ url('/portal/rubric') }}">Rubric</a>
@@ -80,9 +81,9 @@
                     @endforeach
                     </tbody>
                 </table>
-                <hr>
+                <br>
                 <h4>Total Score Possible: {{ $total_weight }}</h4>
-                <hr>
+                <br>
                 @if(!$competition->canManageRubric())
                     <div class="alert alert-danger">
                         You cannot modify the rubric anymore, to edit a rubric, competition status must be New, Accept Submissions, or Submission Closed.<br>

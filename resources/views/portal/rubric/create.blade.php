@@ -28,30 +28,31 @@
                     </ol>
                 </nav>
                 <h1>Create Rubric Rule</h1>
+                <br>
                 <form method="post">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Rule Name</label>
+                            <label><b>Rule Name</b></label>
                             <p style="font-size: 12px;">Name for this rule.</p>
                             <input type="text" class="form-control" name="name" /><br>
-                            <label>Maximum Score</label>
+                            <label><b>Maximum Score</b></label>
                             <p style="font-size: 12px;">Maximum score possible for the rule.</p>
                             <input type="number" class="form-control" value="100" name="score" /><br>
-                            <label>Weight</label>
+                            <label><b>Weight</b></label>
                             <p style="font-size: 12px;">Weight for this rule.</p>
                             <input type="number" class="form-control" value="10" name="weight" /><br>
                         </div>
                         <div class="col-md-6">
-                            <label>Rule Description</label>
-                            <p style="font-size: 12px;">An description for the rule.</p>
+                            <label><b>Rule Description</b></label>
+                            <p style="font-size: 12px;">A description for the rule, you can write instructions for judges here.</p>
                             <textarea class="form-control" name="description"></textarea><br>
-                            <label>Group</label>
-                            <p style="font-size: 12px;">Group for this rule.</p>
+                            <label><b>Group</b></label>
+                            <p style="font-size: 12px;">Give this rule a group, for example Content.</p>
                             <input type="text" class="form-control" value="Ungrouped" name="group" /><br>
                         </div>
                         <div class="col-md-12">
-                            <button class="btn btn-primary">Create</button>
+                            <button class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Create</button>
                         </div>
                     </div>
 

@@ -77,7 +77,7 @@ class JudgingRuleController extends Controller
             $rule = JudgingRule::where('id', $request->id)->where('competition_id', $competition_id)->first();
             if ($rule) {
                 $rule->delete();
-                return redirect('/portal/rubric')->with('success', "Rule deleted.");
+                return back()->with('success', "Rule deleted.");
             } else {
                 return back()->with('error', 'Cannot find rule.');
             }
