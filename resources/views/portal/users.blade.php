@@ -53,21 +53,21 @@ $roleNames = [
                     </div>
                 </div>
                 <hr>
-                <table class="table table-striped">
+                <table class="table table-light" data-toggle="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">User ID</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Created At</th>
-                        <th scope="col">Updated At</th>
+                        <th data-sortable="true" scope="col">#</th>
+                        <th data-sortable="true" scope="col">User ID</th>
+                        <th data-sortable="true" scope="col">Role</th>
+                        <th data-sortable="true" scope="col">Created At</th>
+                        <th data-sortable="true" scope="col">Updated At</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <th scope="row">{{$user->id}}</th>
+                            <td scope="row">{{$user->id}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$roleNames[$user->role]}}</td>
                             <td>{{date('M jS, Y G:i e', strtotime($user->created_at))}}</td>

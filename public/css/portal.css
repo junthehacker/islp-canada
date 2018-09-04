@@ -161,3 +161,11 @@ h1 {
     border: none;
     box-shadow: rgba(0,0,0,0.1) 5px 5px 20px;
 }
+
+.scored-td {
+    background-color: rgba(23, 244, 0, 0.21);
+}
+
+.pending-td {
+    opacity: 0.8;
+}
