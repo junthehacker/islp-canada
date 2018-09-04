@@ -90,13 +90,12 @@
                             Export to CSV
                         </button>
                     </a>
-                    <hr>
+                    <br><br>
                     @if($competition)
                         <h3>Submissions to {{ $competition->name }} ({{count($posters)}})</h3>
                     @else
                         <h3>All Submissions ({{count($posters)}})</h3>
                     @endif
-                    <hr>
                     <form>
                         <div class="row">
                             <div class="col-md-6">
@@ -115,23 +114,23 @@
 
                         </div>
                     </form>
-                    <hr>
-                    <table class="table">
+                    <br>
+                    <table class="table table-light" data-toggle="table">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">School</th>
-                            <th scope="col">Student</th>
-                            <th scope="col">Competition</th>
-                            <th scope="col">Submitted At</th>
+                            <th data-sortable="true" scope="col">#</th>
+                            <th data-sortable="true" scope="col">Title</th>
+                            <th data-sortable="true" scope="col">School</th>
+                            <th data-sortable="true" scope="col">Student</th>
+                            <th data-sortable="true" scope="col">Competition</th>
+                            <th data-sortable="true" scope="col">Submitted At</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($posters as $poster)
                             <tr>
-                                <th scope="row">{{$poster->id}}</th>
+                                <td scope="row">{{$poster->id}}</td>
                                 <td>{{$poster->title}}</td>
                                 <td>{{$poster->user->teacher->school}}</td>
                                 <td>{{$poster->student_name}}</td>

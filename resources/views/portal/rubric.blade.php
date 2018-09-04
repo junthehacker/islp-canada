@@ -22,12 +22,13 @@
                     </ol>
                 </nav>
                 <h1>Manage Rubric</h1>
-                <h3>Which Competition?</h3>
-                <table class="table">
+                <h3>Choose a competition you want to manage rubric for</h3>
+                    <br>
+                <table class="table table-light" data-toggle="table">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Status</th>
+                        <th data-sortable="true">Name</th>
+                        <th data-sortable="true">Status</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -35,9 +36,13 @@
                     @foreach($competitions as $competition)
                         <tr>
                             <td>{{ $competition->name }}</td>
-                            <td>{{ $competition->status }}</td>
+                            <td>{{ $competition->getStatusName() }}</td>
                             <td><a href="{{ url('portal/rubric/' . $competition->id) }}">
-                                    <button class="btn btn-primary">Select</button>
+                                    @if($competition->canManageRubric())
+                                        <button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Manage</button>
+                                    @else
+                                        <button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
+                                    @endif
                                 </a></td>
                         </tr>
                     @endforeach

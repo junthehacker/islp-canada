@@ -28,7 +28,8 @@
                     </ol>
                 </nav>
                 <h1>Rubric for {{ $competition->name }}</h1>
-                <table class="table">
+                    <br>
+                <table class="table table-light" data-toggle="table">
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -54,7 +55,7 @@
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn btn-primary dropdown-toggle"
-                                                    data-toggle="dropdown" @if($competition->status === 'archived') disabled @endif>
+                                                    data-toggle="dropdown" @if(!$competition->canManageRubric()) disabled @endif>
                                                 Actions
                                             </button>
                                             <div class="dropdown-menu">
@@ -82,8 +83,11 @@
                 <hr>
                 <h4>Total Score Possible: {{ $total_weight }}</h4>
                 <hr>
-                @if($competition->status === 'archived')
-                    <div class="alert alert-warning">This is an archived competition, you may not modify the rubric.</div>
+                @if(!$competition->canManageRubric())
+                    <div class="alert alert-danger">
+                        You cannot modify the rubric anymore, to edit a rubric, competition status must be New, Accept Submissions, or Submission Closed.<br>
+                        Current competition status is: <b>{{ $competition->getStatusName() }}</b>
+                    </div>
                 @else
                     <a href="{{ url('/portal/rubric/' . $competition->id . '/rules/create') }}">
                         <button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Create New Rule

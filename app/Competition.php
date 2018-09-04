@@ -260,4 +260,12 @@ class Competition extends Model
     public function acceptSubmissions(){
         return $this->status === 'accept_submissions';
     }
+
+    /**
+     * Can rubric be modified for this competition
+     * @return bool
+     */
+    public function canManageRubric(){
+        return $this->status === 'new' || $this->status === 'accept_submissions' || $this->status === 'submission_closed';
+    }
 }
