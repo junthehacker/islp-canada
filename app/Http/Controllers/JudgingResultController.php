@@ -72,4 +72,42 @@ class JudgingResultController extends Controller
 
         return back()->with('success', 'Judges assigned.');
     }
+
+    /**
+     * Return confirm deletion page
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function deletePage(Request $request, $id)
+    {
+        $result = JudgingResult::find($id);
+        if (!$result) {
+            return response()->view('errors/404')->setStatusCode(404);
+        }
+
+        // Return the deletion page
+        return view('portal/judging/delete', [
+            'judging_result' => $result
+        ]);
+    }
+
+    /**
+     * Remove a judge from submission
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     */
+    public function delete(Request $request, $id)
+    {
+        $result = JudgingResult::find($id);
+        if (!$result) {
+            return response()->view('errors/404')->setStatusCode(404);
+        }
+
+        // Delete the result and return back to judging management page
+        $result->delete();
+        return redirect('/portal/judging')->with('success', 'Judge removed.');
+    }
+
 }

@@ -303,7 +303,7 @@ class PortalController extends Controller
     public function judgingPage(Request $request)
     {
         $competition = $this->_getCurrentCompetition();
-        return view('portal/judging', [
+        return view('portal/judging/home', [
             'judges' => User::where('role', 2)->get(),
             'competition' => $competition
         ]);

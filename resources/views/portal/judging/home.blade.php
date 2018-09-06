@@ -1,9 +1,9 @@
-@extends('layouts/portal')
+@extends('layouts.portal')
 
-@section('title') Competitions @endsection
+@section('title') Judging @endsection
 
 @section('content')
-    @include('portal/partials/nav')
+    @include('portal.partials.nav')
     <div class="container-fluid main-container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -13,6 +13,7 @@
         <h1>Manage Judging</h1>
         @if($competition)
         <h3>Judging dashboard for {{ $competition->name }}</h3>
+        @include('portal.partials.commonsuccess')
         <hr>
             <h3>Automatic Assignment</h3>
             @if($competition->status === 'submission_closed')
@@ -32,11 +33,11 @@
                 </div>
             @endif
             <hr>
-            <h3>Assignments</h3>
+            <h3>Assignments and Results</h3>
             <div class="alert alert-light">This information should never be shared with judges while judging is not
                 finished.
             </div>
-            <table class="table table-light" data-toggle="table">
+            <table class="table table-light">
                 <thead>
                 <tr>
                     <th>Poster</th>
@@ -45,6 +46,7 @@
                     <th>Assigned Judges</th>
                     <th>Status</th>
                     <th>Actions</th>
+                    <th>Poster Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,10 +59,8 @@
                             <td rowspan="{{ count($poster->judging_results) }}">{{ $poster->getGroupName() }}</td>
                             @endif
                                 <td>
-
                                     {{ $result->user->email }}<br>
-
-                            </td>
+                                </td>
                             <td class="@if($result->result) scored-td @else pending-td @endif">
                                     @if($result->result)
                                         {{ $result->result['final_percentage'] * 100 }}%
@@ -76,12 +76,19 @@
                                         Actions
                                     </button>
                                     <div class="dropdown-menu">
-                                        <button class="dropdown-item">
-                                            <i class="fa fa-external-link" aria-hidden="true"></i> View Detail
-                                        </button>
+                                        <a href="{{ url('portal/judging/delete/' . $result->id) }}">
+                                            <button class="dropdown-item">
+                                                <i class="fa fa-trash" aria-hidden="true"></i> Remove Judge
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                             </td>
+                            @if($key === 0)
+                                <td rowspan="{{ count($poster->judging_results) }}">
+                                    <button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Assign New Judge</button>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 @endforeach
