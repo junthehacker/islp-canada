@@ -40,7 +40,7 @@
             <table class="table table-light">
                 <thead>
                 <tr>
-                    <th>Poster</th>
+                    <th>Poster Title</th>
                     <th>School</th>
                     <th>Group</th>
                     <th>Assigned Judges</th>
@@ -58,9 +58,9 @@
                             <td rowspan="{{ count($poster->judging_results) }}">{{ $poster->user->teacher->school }}</td>
                             <td rowspan="{{ count($poster->judging_results) }}">{{ $poster->getGroupName() }}</td>
                             @endif
-                                <td>
-                                    {{ $result->user->email }}<br>
-                                </td>
+                            <td>
+                                {{ $result->user->email }}<br>
+                            </td>
                             <td class="@if($result->result) scored-td @else pending-td @endif">
                                     @if($result->result)
                                         {{ $result->result['final_percentage'] * 100 }}%
@@ -86,7 +86,9 @@
                             </td>
                             @if($key === 0)
                                 <td rowspan="{{ count($poster->judging_results) }}">
-                                    <button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Assign New Judge</button>
+                                    <a href="{{ url('/portal/judging/assign/' . $poster->id) }}">
+                                        <button class="btn btn-primary">Manual Assign Judges</button>
+                                    </a>
                                 </td>
                             @endif
                         </tr>
