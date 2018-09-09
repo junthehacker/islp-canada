@@ -2,9 +2,13 @@
 
 @section('content')
     <h1>All Posts</h1>
+    @if(request()->user)
     <a href="{{ url('forum/new') }}">
         <button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Create New Post</button>
     </a>
+    @else
+        <div class="alert alert-warning">You must login before posting a new thread. To login, click <a href="/portal/login">here</a></div>
+    @endif
     @foreach($channels as $channel)
         <h3>{{ $channel->name }}</h3>
         @foreach($channel->forum_posts as $post)

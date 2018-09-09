@@ -14,12 +14,14 @@
                     </ol>
                 </nav>
                 <h1>Assigned</h1>
+                <br>
                 @if($competition && $competition->status === 'begin_judging')
-                    <table class="table">
+                    <table class="table" data-toggle="table">
                         <thead>
                         <tr>
                             <th>ID</th>
                             <th>Competition</th>
+                            <th>Group</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -30,6 +32,7 @@
                                 <tr>
                                     <td>{{ $result->id }}</td>
                                     <td>{{ $competition->name }}</td>
+                                    <td>{{ $result->poster->getGroupName() }}</td>
                                     <td>
                                         @if($result->result)
                                             <span class="badge badge-success">Scored</span>

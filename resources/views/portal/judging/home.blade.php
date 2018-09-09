@@ -51,23 +51,22 @@
                 </thead>
                 <tbody>
                 @foreach($competition->posters as $poster)
-                    @foreach($poster->judging_results as $key => $result)
-                        <tr>
-                            @if($key === 0)
-                            <td rowspan="{{ count($poster->judging_results) }}">{{ $poster->title }}</td>
-                            <td rowspan="{{ count($poster->judging_results) }}">{{ $poster->user->teacher->school }}</td>
-                            <td rowspan="{{ count($poster->judging_results) }}">{{ $poster->getGroupName() }}</td>
-                            @endif
+                    <tr>
+                        <td rowspan="{{ max(count($poster->judging_results) + 1, 1) }}">{{ $poster->title }}</td>
+                        <td rowspan="{{ max(count($poster->judging_results) + 1, 1) }}">{{ $poster->user->teacher->school }}</td>
+                        <td rowspan="{{ max(count($poster->judging_results) + 1, 1) }}">{{ $poster->getGroupName() }}</td>
+                        @forelse($poster->judging_results as $key => $result)
+                            <tr>
                             <td>
                                 {{ $result->user->email }}<br>
                             </td>
                             <td class="@if($result->result) scored-td @else pending-td @endif">
-                                    @if($result->result)
-                                        {{ $result->result['final_percentage'] * 100 }}%
-                                    @else
-                                        Pending
-                                    @endif
-                                    <br>
+                                @if($result->result)
+                                    {{ $result->result['final_percentage'] * 100 }}%
+                                @else
+                                    Pending
+                                @endif
+                                <br>
                             </td>
                             <td>
                                 <div class="dropdown">
@@ -85,14 +84,26 @@
                                 </div>
                             </td>
                             @if($key === 0)
-                                <td rowspan="{{ count($poster->judging_results) }}">
+                                <td rowspan="{{ max(count($poster->judging_results), 1) }}">
                                     <a href="{{ url('/portal/judging/assign/' . $poster->id) }}">
                                         <button class="btn btn-primary">Manual Assign Judges</button>
                                     </a>
                                 </td>
                             @endif
-                        </tr>
-                    @endforeach
+                            </tr>
+                        @empty
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        @endforelse
+                        @if(count($poster->judging_results) === 0)
+                            <td rowspan="{{ max(count($poster->judging_results), 1) }}">
+                                <a href="{{ url('/portal/judging/assign/' . $poster->id) }}">
+                                    <button class="btn btn-primary">Manual Assign Judges</button>
+                                </a>
+                            </td>
+                        @endif
+                    </tr>
                 @endforeach
                 </tbody>
             </table>

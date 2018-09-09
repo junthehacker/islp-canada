@@ -15,7 +15,7 @@
                 <h1>Dashboard</h1>
                 <h3>Your are logged in as {{ request()->user->getRoleName() }}.</h3>
             </div>
-            @if(request()->user->role === 0)
+            @if(request()->user->isAdmin())
                 <div class="col-md-12 d-flex align-items-stretch">
                     <div class="card w-100">
                         <div class="card-body">
@@ -140,34 +140,29 @@
                     </div>
                 </div>
             @endif
-            @if(request()->user->role === 2)
+            @if(request()->user->isJudge())
                 <div class="col-md-6">
-                    <hr>
                     @if($competition)
-                        <h2><i class="fa fa-file-text" aria-hidden="true"></i> Assigned</h2>
+                        <div class="card w-100">
+                            <div class="card-body">
+                                <h3 class="card-title"><i class="fa fa-file-text" aria-hidden="true"></i> Assigned Submissions</h3>
+                                <p>This includes all submissions that has been assigned to you since the beginning.</p>
+                                <div class="large-dashboard-num">{{ count(request()->user->judging_results) }}</div>
+                            </div>
+                            <div class="card-footer">
+                                @if($competition->status === 'begin_judging')
+                                    <a href="{{ url('portal/judge') }}">
+                                        <button class="btn btn-primary">Go to judging system</button>
+                                    </a>
+                                @else
+                                    <div class="alert alert-light">Judging is currently disabled.</div>
+                                @endif
+                            </div>
+                        </div>
                         <div class="alert alert-warning">
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                            By using this portal, you agree to follow <a href="#">Judge Code of Conduct</a>.
+                            By using this portal, you agree to follow Judge Code of Conduct.
                         </div>
-                        <div class="large-dashboard-num">{{ count(request()->user->judging_results) }}</div>
-                        @if($competition->status === 'begin_judging')
-                            <a href="{{ url('portal/judge') }}">
-                                <button class="btn btn-primary">Go to judging system</button>
-                            </a>
-                        @else
-                            <div class="alert alert-light">Judging is currently disabled.</div>
-                        @endif
-                    @else
-                        <p>No competition is active.</p>
-                    @endif
-                </div>
-
-                <div class="col-md-6">
-                    <hr>
-                    @if($competition)
-                        <h2><i class="fa fa-file-text" aria-hidden="true"></i> Competition</h2>
-
-                        <p style="font-size: 20px;">You are judging {{ $competition->name }}</p>
                     @else
                         <p>No competition is active.</p>
                     @endif

@@ -74,4 +74,28 @@ class User extends Model
     public function isTeacher(){
         return $this->role === 1;
     }
+
+    /**
+     * Return if this is an admin account
+     * @return bool
+     */
+    public function isAdmin(){
+        return $this->role === 0;
+    }
+
+    /**
+     * Return if this is a judge account
+     * @return bool
+     */
+    public function isJudge(){
+        return $this->role === 2;
+    }
+
+    /**
+     * Return if this is a mentor account
+     * @return bool
+     */
+    public function isMentor(){
+        return $this->role === 3;
+    }
 }

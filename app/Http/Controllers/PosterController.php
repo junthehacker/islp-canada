@@ -102,8 +102,8 @@ class PosterController extends Controller
         $available_judges = [];
 
         foreach ($judges as $judge) {
+            $in = false;
             foreach ($poster->judging_results as $result) {
-                $in = false;
                 if ($result->user->id === $judge->id) {
                     $in = true;
                     break;

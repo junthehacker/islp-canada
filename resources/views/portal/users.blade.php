@@ -33,21 +33,6 @@ $roleNames = [
                     Create User
                 </button>
                 <hr>
-                <div class="row">
-                    <div class="col-md-6">
-                        <select class="form-control">
-                            <option>All</option>
-                            <option>Admin</option>
-                            <option>Teacher</option>
-                            <option>Judge</option>
-                            <option>Mentor</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-primary"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
-                    </div>
-                </div>
-                <hr>
                 <table class="table table-light" data-toggle="table">
                     <thead>
                     <tr>

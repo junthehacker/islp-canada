@@ -1,38 +1,42 @@
+@php
+    use App\StringResource;
+@endphp
+
 <form id="teacher-application-form">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-6 pad-top">
-            <label for="teacher-fullname">Full Name *</label>
+            <label for="teacher-fullname">{{ StringResource::get('teacher_register_full_name') }} *</label>
             <input type="text" name="name" class="form-control inverted" id="teacher-fullname"/>
         </div>
         <div class="col-md-6 pad-top">
-            <label for="teacher-email">Email Address (Work) *</label>
+            <label for="teacher-email">{{ StringResource::get('teacher_register_work_email') }} *</label>
             <input type="email" name="email" class="form-control inverted" id="teacher-email"/>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 pad-top">
-            <label for="teacher-subject">Teaching Subject *</label>
+            <label for="teacher-subject">{{ StringResource::get('teacher_register_teaching_subject') }} *</label>
             <input type="text" name="teaching_subject" class="form-control inverted" id="teacher-subject"/>
         </div>
         <div class="col-md-6 pad-top">
-            <label for="teacher-hear">How did you hear about ISLP? *</label>
+            <label for="teacher-hear">{{ StringResource::get('teacher_register_how_did_you_hear') }} *</label>
             <input type="text" name="heard_from" class="form-control inverted" id="teacher-hear"/>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 pad-top">
-            <label for="teacher-school">School Name *</label>
+            <label for="teacher-school">{{ StringResource::get('teacher_register_school_name') }} *</label>
             <input type="text" name="school" class="form-control inverted" id="teacher-school"/>
         </div>
         <div class="col-md-6 pad-top">
-            <label for="teacher-password">Choose a password for your account *</label>
+            <label for="teacher-password">{{ StringResource::get('teacher_register_password') }} *</label>
             <input type="password" name="password" class="form-control inverted" id="teacher-password"/>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 pad-top">
-            <label for="teacher-resources">Any additional resources required?</label>
+            <label for="teacher-resources">{{ StringResource::get('teacher_register_additional') }}</label>
             <input type="text" name="additional_resources" class="form-control inverted" id="teacher-resources"/>
         </div>
     </div>

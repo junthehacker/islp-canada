@@ -56,7 +56,7 @@ class PortalController extends Controller
             }
         }
         if ($request->user) {
-            if ($request->user->role === 0) {
+            if ($request->user->isAdmin()) {
                 return view('portal/dashboard', [
                     'users' => User::all(),
                     'posters' => Poster::all(),
@@ -65,9 +65,16 @@ class PortalController extends Controller
                     'competition' => $this->_getCurrentCompetition()
                 ]);
             }
+            if($request->user->isJudge()) {
+                return view('portal/dashboard', [
+                    'competition' => $this->_getCurrentCompetition(),
+                    'judging_results' => JudgingResult::where('user_id', $request->user->id)
+                ]);
+            }
             return view('portal/dashboard', [
                 'competition' => $this->_getCurrentCompetition()
             ]);
+
         } else {
             return redirect('/portal/login');
         }

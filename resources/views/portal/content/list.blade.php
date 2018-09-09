@@ -18,7 +18,7 @@
         </a>
         <hr>
         <h3>All Text Resources</h3>
-        <table class="table">
+        <table class="table table-light" data-toggle="table">
             <thead>
             <tr>
                 <th scope="col">Identifier</th>

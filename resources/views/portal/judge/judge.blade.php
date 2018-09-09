@@ -55,4 +55,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function calculateScoreTotal(){
+
+        }
+    </script>
 @endsection

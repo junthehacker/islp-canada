@@ -95,8 +95,8 @@
                     <div class="p-5">
                         <div class="pill-header">
                             <div class="pill-header-inner">
-                                <button class="left active" id="student-button" onClick="switchToStudent();">Student
-                                </button><button class="right" id="teacher-button" onClick="switchToTeacher();">Teacher</button>
+                                <button class="left active" id="student-button" onClick="switchToStudent();">{{ StringResource::get('landing_student') }}
+                                </button><button class="right" id="teacher-button" onClick="switchToTeacher();">{{ StringResource::get('landing_teacher') }}</button>
                             </div>
                         </div>
                         <div id="student-section">

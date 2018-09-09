@@ -25,8 +25,6 @@
             @if($competition->status === 'new')
                 <li><input type="checkbox" disabled /> This is a new competition, submission is not open, start accepting submissions by changing the status to Accept Submissions.</li>
             @endif
-
-            <li><input type="checkbox" disabled /> Seems like you don't have rubric yet, you must have a rubric before judges can start judging.</li>
         </ul>
     </div>
     <div class="col-md-6">
