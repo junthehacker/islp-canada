@@ -431,7 +431,7 @@ class PortalController extends Controller
                     'role' => $request->role
                 ]);
                 $user->save();
-                return back()->with('message', 'User created');
+                return back()->with('success', 'User created');
             }
         } else {
             return back()->with('error', 'not authorized');

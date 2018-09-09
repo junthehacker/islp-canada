@@ -54,6 +54,7 @@ Route::post('/portal/forum/channels/disable', 'ForumChannelController@disable')-
 Route::get('/portal/users', 'PortalController@usersPage')->name('users')->middleware('admin');
 Route::get('/portal/users/delete/{id}', 'UserController@deletePage')->name('users')->middleware('admin');
 Route::post('/portal/users/delete/{id}', 'UserController@delete')->name('users')->middleware('admin');
+Route::get('/portal/users/activate/{id}', 'UserController@activatePage')->name('users')->middleware('admin');
 
 
 // Content management routes

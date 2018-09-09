@@ -98,7 +98,7 @@ class PosterController extends Controller
             return response()->view('errors/404')->setStatusCode(404);
         }
 
-        $judges = User::where('role', 2)->get();
+        $judges = User::where('role', 2)->where('active', true)->get();
         $available_judges = [];
 
         foreach ($judges as $judge) {

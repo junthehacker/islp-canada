@@ -11,15 +11,15 @@
                 <div class="modal-body">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Title</label>
+                        <label><b>Title</b></label>
                         <input type="text" name="title" placeholder="Title" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label>Student Name</label>
+                        <label><b>Student Name</b></label>
                         <input type="text" name="student_name" placeholder="Student Name" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label>Group</label>
+                        <label><b>Group</b></label>
                         <select type="text" name="group" placeholder="Group" class="form-control">
                             <option value="lower_secondary">Lower Secondary (15 years old or younger)</option>
                             <option value="upper_secondary">Upper Secondary (18 years old or younger)</option>
@@ -27,7 +27,7 @@
                         </select>
                     </div>
                     <input type="hidden" id="submission_image_input" name="image_base64" value="" />
-                    <label>Image File (< 4GB)</label><br>
+                    <label><b>Image File (< 4GB)</b></label><br>
                     <input type="file" id="submission_image_file" />
                     <div id="submission_image_preview"></div>
                 </div>

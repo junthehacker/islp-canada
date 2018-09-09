@@ -1,5 +1,5 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="addUserModal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Add New User</h5>
@@ -11,15 +11,17 @@
                 <div class="modal-body">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Email Address</label>
+                        <label><b>Email Address</b></label>
                         <input type="text" name="email" placeholder="Email Address" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" name="password" placeholder="Password" class="form-control"/>
+                        <label><b>Password</b></label>
+                        <button class="btn btn-link" onClick="generateRandomPassword()" type="button">Generate</button>
+                        <input type="text" id="add-user-modal-password" name="password" placeholder="Password" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label>User Role</label>
+                        <label><b>User Role</b></label>
+                        <div class="text-muted small pb-1">To create teacher or mentor accounts, please instruct the user to sign-up on landing page. Admin have the exact same privilege as your account, create with caution!</div>
                         <select name="role" class="form-control">
                             <option value="0">Admin</option>
                             <option value="2">Judge</option>
@@ -34,3 +36,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    function generateRandomPassword(){
+        $("#add-user-modal-password").val(Math.random().toString(36).substring(7) + Math.random().toString(36).substring(7));
+    }
+</script>

@@ -169,3 +169,7 @@ h1 {
 .pending-td {
     opacity: 0.8;
 }
+
+.op-5 {
+    opacity: 0.5 !important;
+}

@@ -15,12 +15,16 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function authenticate(Request $request){
+    public function authenticate(Request $request)
+    {
         $user = User::where('email', $request->email)->first();
-        if(!$user){
+        if (!$user) {
             return redirect('/portal/login')->with('error', 'User ID does not exist.');
         }
-        if(Hash::check($request->password, $user->password)){
+        if(!$user->active){
+            return redirect('/portal/login')->with('error', 'Your account has been deactivated, please contact admin for more details.');
+        }
+        if (Hash::check($request->password, $user->password)) {
             session(['uid' => $user->id]);
             return redirect('/portal/dashboard');
         } else {
@@ -32,8 +36,9 @@ class UserController extends Controller
      * Return the login page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function loginPage(){
-        if(session('uid') && User::find(session('uid'))){
+    public function loginPage()
+    {
+        if (session('uid') && User::find(session('uid'))) {
             return redirect('/portal/dashboard');
         } else {
             return view('portal/login');
@@ -45,27 +50,28 @@ class UserController extends Controller
      * @param Request $request
      * @return string
      */
-    public function createTeacherAccount(Request $request){
-        if(strlen($request->input('password')) < 8){
+    public function createTeacherAccount(Request $request)
+    {
+        if (strlen($request->input('password')) < 8) {
             return "Password must be at least 8 characters long.";
         }
         $user = User::where('email', $request->input('email'))->first();
-        if($user){
+        if ($user) {
             return "Email address is already used by another user.";
         }
-        if(!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)){
+        if (!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)) {
             return "Please enter a valid email address.";
         }
-        if(!$request->name){
+        if (!$request->name) {
             return "Name is a required field.";
         }
-        if(!$request->school){
+        if (!$request->school) {
             return "School is a required field.";
         }
-        if(!$request->heard_from){
+        if (!$request->heard_from) {
             return "[How did you hear about ISLP?] is a required field.";
         }
-        if(!$request->teaching_subject){
+        if (!$request->teaching_subject) {
             return "Teaching subject is a required field.";
         }
 
@@ -87,27 +93,28 @@ class UserController extends Controller
 
     }
 
-    public function createMentorAccount(Request $request){
-        if(strlen($request->input('password')) < 8){
+    public function createMentorAccount(Request $request)
+    {
+        if (strlen($request->input('password')) < 8) {
             return "Password must be at least 8 characters long.";
         }
         $user = User::where('email', $request->input('email'))->first();
-        if($user){
+        if ($user) {
             return "Email address is already used by another user.";
         }
-        if(!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)){
+        if (!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)) {
             return "Please enter a valid email address.";
         }
-        if(!$request->name){
+        if (!$request->name) {
             return "Name is a required field.";
         }
-        if(!$request->school){
+        if (!$request->school) {
             return "School is a required field.";
         }
-        if(!$request->major_area){
+        if (!$request->major_area) {
             return "Major area is a required field.";
         }
-        if(!$request->reason){
+        if (!$request->reason) {
             return "Reason is a required field";
         }
 
@@ -134,14 +141,33 @@ class UserController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function deletePage(Request $request, $id){
+    public function deletePage(Request $request, $id)
+    {
         $user = User::find($id);
         if ($user) {
             return view('portal/user/delete', [
                 'user' => $user
             ]);
         } else {
-            return App::abort(404);
+            return response()->view('errors/404')->setStatusCode(404);
+        }
+    }
+
+    /**
+     * Get user activation page
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
+     */
+    public function activatePage(Request $request, $id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            return view('portal/user/activate', [
+                'user' => $user
+            ]);
+        } else {
+            return response()->view('errors/404')->setStatusCode(404);
         }
     }
 
@@ -151,13 +177,15 @@ class UserController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(Request $request, $id){
+    public function delete(Request $request, $id)
+    {
         $user = User::find($id);
         if ($user) {
-            $user->delete();
-            return redirect('portal/users')->with('success', "User deleted.");
+            $user->active = 0;
+            $user->save();
+            return redirect('portal/users')->with('success', "User deactivated.");
         } else {
-            return App::abort(404);
+            return response()->view('errors/404')->setStatusCode(404);
         }
     }
 }

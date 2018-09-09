@@ -26,12 +26,7 @@ $roleNames = [
                         {{ session('error') }}
                     </div>
                 @endif
-                @if (session('message'))
-                    <div class="alert alert-success">
-                        {{ session('message') }}
-                    </div>
-                @endif
-                @include('portal.partials.commonstatus')
+                @include('portal.partials.commonsuccess')
                 <h1>Users</h1>
                 <button class="btn btn-primary" data-toggle="modal" data-target="#addUserModal"><i class="fa fa-plus"
                                                                                                    aria-hidden="true"></i>
@@ -59,6 +54,7 @@ $roleNames = [
                         <th data-sortable="true" scope="col">#</th>
                         <th data-sortable="true" scope="col">User ID</th>
                         <th data-sortable="true" scope="col">Role</th>
+                        <th data-sortable="true" scope="col">Activated</th>
                         <th data-sortable="true" scope="col">Created At</th>
                         <th data-sortable="true" scope="col">Updated At</th>
                         <th scope="col">Actions</th>
@@ -67,28 +63,43 @@ $roleNames = [
                     <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <td scope="row">{{$user->id}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$roleNames[$user->role]}}</td>
-                            <td>{{date('M jS, Y G:i e', strtotime($user->created_at))}}</td>
-                            <td>{{date('M jS, Y G:i e', strtotime($user->updated_at))}}</td>
+                            <td scope="row" class="@if(!$user->active) op-5 @endif">{{$user->id}}</td>
+                            <td class="@if(!$user->active) op-5 @endif">{{$user->email}}</td>
+                            <td class="@if(!$user->active) op-5 @endif">{{$roleNames[$user->role]}}</td>
+                            <td class="@if(!$user->active) op-5 @endif">
+                                @if($user->active)
+                                    Activated
+                                @else
+                                    Deactivated
+                                @endif
+                            </td>
+                            <td class="@if(!$user->active) op-5 @endif">{{date('M jS, Y G:i e', strtotime($user->created_at))}}</td>
+                            <td class="@if(!$user->active) op-5 @endif">{{date('M jS, Y G:i e', strtotime($user->updated_at))}}</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-primary dropdown-toggle"
                                             data-toggle="dropdown">
                                         Actions
                                     </button>
+                                    @if($user->active)
                                     <div class="dropdown-menu">
-                                        <button class="dropdown-item"><i class="fa fa-external-link"
-                                                                         aria-hidden="true"></i> View Detail
-                                        </button>
                                         <a href="{{ url('portal/users/delete/' . $user->id) }}">
                                             <button class="dropdown-item">
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                Delete
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                                Deactivate
                                             </button>
                                         </a>
                                     </div>
+                                    @else
+                                        <div class="dropdown-menu">
+                                            <a href="{{ url('portal/users/activate/' . $user->id) }}">
+                                                <button class="dropdown-item">
+                                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                                    Activate
+                                                </button>
+                                            </a>
+                                        </div>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
